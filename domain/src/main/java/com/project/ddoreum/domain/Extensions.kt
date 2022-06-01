@@ -14,4 +14,3 @@ data class ApiResult<out T>(val status: Status, val responseData: T?, val error:
             return ApiResult(Status.ERROR, null, error)
         }
     }
-}
