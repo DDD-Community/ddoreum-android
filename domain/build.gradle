@@ -45,6 +45,9 @@ dependencies {
     //material
     implementation "com.google.android.material:material:1.6.0"
 
+    //paging
+    implementation "androidx.paging:paging-common:3.0.0"
+
     //unit test
     testImplementation 'junit:junit:4.13.2'
 }
