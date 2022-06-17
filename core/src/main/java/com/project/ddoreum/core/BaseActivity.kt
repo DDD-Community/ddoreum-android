@@ -26,4 +26,10 @@ abstract class BaseActivity<T : ViewDataBinding>(@LayoutRes private val layoutId
         binding.run(action)
     }
 
+    protected abstract fun initLayout()
+
+    protected fun bind(action: T.() -> Unit) {
+        binding.run(action)
+    }
+
 }

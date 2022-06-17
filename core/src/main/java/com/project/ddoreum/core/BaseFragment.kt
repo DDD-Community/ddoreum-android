@@ -9,12 +9,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
-
-abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val layoutId: Int) : Fragment(){
+abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val layoutId: Int) :
+    Fragment() {
 
     lateinit var binding: T
 
-    abstract fun initView()
+    protected abstract val viewModel: BaseViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,9 +25,10 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val layoutId
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initView()
+    protected abstract fun initLayout()
+
+    protected fun bind(action: T.() -> Unit) {
+        binding.run(action)
     }
 
 }
