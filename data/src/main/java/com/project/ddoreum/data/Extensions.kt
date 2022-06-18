@@ -32,3 +32,4 @@ object ApiErrorCase {
     const val COMMON_ERROR = "server_error"
     const val HTTP_EXCEPTION_ERROR = "http_exception_error"
     const val NETWORK_ERROR = "network_error"
+}

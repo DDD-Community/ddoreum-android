@@ -4,7 +4,21 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.37083333333333335" />
-        <entry key="presentation/src/main/res/layout/activity_main.xml" value="0.17346014492753623" />
+        <entry key="presentation/src/main/res/drawable/bottom_nav_challenge.xml" value="0.156" />
+        <entry key="presentation/src/main/res/drawable/bottom_nav_home.xml" value="0.25" />
+        <entry key="presentation/src/main/res/drawable/bottom_nav_mountain_info.xml" value="0.156" />
+        <entry key="presentation/src/main/res/drawable/bottom_nav_my_page.xml" value="0.156" />
+        <entry key="presentation/src/main/res/drawable/bottom_nav_record.xml" value="0.156" />
+        <entry key="presentation/src/main/res/drawable/bottomnav_item_color.xml" value="0.156" />
+        <entry key="presentation/src/main/res/drawable/ic_record_selected.xml" value="0.156" />
+        <entry key="presentation/src/main/res/drawable/ic_record_unselected.xml" value="0.156" />
+        <entry key="presentation/src/main/res/layout/activity_main.xml" value="0.375" />
+        <entry key="presentation/src/main/res/layout/fragment_challenge.xml" value="0.29270833333333335" />
+        <entry key="presentation/src/main/res/layout/fragment_home.xml" value="0.3078125" />
+        <entry key="presentation/src/main/res/layout/fragment_mountain_info.xml" value="0.29270833333333335" />
+        <entry key="presentation/src/main/res/layout/fragment_my_page.xml" value="0.29270833333333335" />
+        <entry key="presentation/src/main/res/layout/fragment_record.xml" value="0.3078125" />
+        <entry key="presentation/src/main/res/menu/menu_bottom_navigation.xml" value="0.3078125" />
       </map>
     </option>
   </component>
