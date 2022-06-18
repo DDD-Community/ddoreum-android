@@ -9,4 +9,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     companion object {
         fun newInstance() = MyPageFragment()
     }
+
+    override fun initView() {
+    }
 }

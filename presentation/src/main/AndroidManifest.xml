@@ -19,6 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="opqzyjxjjg" />
+    </application>
 </manifest>

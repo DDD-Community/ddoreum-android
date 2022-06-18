@@ -9,4 +9,7 @@ class RecordFragment : BaseFragment<FragmentRecordBinding>(R.layout.fragment_rec
     companion object {
         fun newInstance() = RecordFragment()
     }
+
+    override fun initView() {
+    }
 }

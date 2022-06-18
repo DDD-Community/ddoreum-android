@@ -11,4 +11,7 @@ class ChallengeFragment : BaseFragment<FragmentChallengeBinding>(R.layout.fragme
         @JvmStatic
         fun newInstance() = ChallengeFragment()
     }
+
+    override fun initView() {
+    }
 }

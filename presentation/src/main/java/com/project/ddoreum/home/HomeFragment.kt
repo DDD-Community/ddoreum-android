@@ -10,4 +10,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     companion object {
         fun newInstance() = HomeFragment()
     }
+
+    override fun initView() {
+    }
 }
