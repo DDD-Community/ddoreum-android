@@ -30,4 +30,8 @@ class SplashViewModel @Inject constructor() : BaseViewModel() {
         }
     }
 
+    fun setPermissionCompleted() {
+        _state.value = SplashState.Finish
+    }
+
 }
