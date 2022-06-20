@@ -16,7 +16,8 @@
     <dimen name="radius_large">12dp</dimen>
     <dimen name="radius_xlarge">16dp</dimen>
 
-    <!-- bottom navigation -->
+    <!-- other fonts -->
     <dimen name="font_bottom_navigation">10dp</dimen>
+    <dimen name="font_splash_title">40dp</dimen>
 
 </resources>

@@ -23,6 +23,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         initFragment()
     }
 
+    override fun initLayout() {
+        val currentFragment = supportFragmentManager.primaryNavigationFragment
+        if (currentFragment == null) {
+            changeFragment(HomeFragment.newInstance(), HomeFragment.toString())
+        }
+
+    }
+
     private fun setUpNavigation() = with(binding) {
         bottomNavView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -33,13 +41,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 R.id.nav_my_page -> changeFragment(MyPageFragment.newInstance(), MyPageFragment.toString())
             }
             return@setOnNavigationItemSelectedListener true
-        }
-    }
-
-    private fun initFragment() {
-        val currentFragment = supportFragmentManager.primaryNavigationFragment
-        if (currentFragment == null) {
-            changeFragment(HomeFragment.newInstance(), HomeFragment.toString())
         }
     }
 
