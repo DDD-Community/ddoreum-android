@@ -54,23 +54,22 @@
             android:id="@+id/layout_search"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            app:layout_constraintTop_toBottomOf="@+id/appbar_mountain_info"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appbar_mountain_info">
 
             <androidx.appcompat.widget.SearchView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="12dp"
+                android:background="@color/gray_deep"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintCircleRadius="6dp"
-                android:background="@color/gray_01"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
