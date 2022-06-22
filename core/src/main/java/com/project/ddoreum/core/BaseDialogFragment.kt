@@ -25,6 +25,12 @@ abstract class BaseDialogFragment<T : ViewDataBinding>(@LayoutRes private val la
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initLayout()
+    }
+
     protected abstract fun initLayout()
 
     protected fun bind(action: T.() -> Unit) {
