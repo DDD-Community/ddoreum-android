@@ -11,9 +11,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MountainInfoFragment : BaseFragment<FragmentMountainInfoBinding>(R.layout.fragment_mountain_info), OnMapReadyCallback {
 
-    private val viewModel by viewModels<MountainInfoViewModel>()
+    override val viewModel: MountainInfoViewModel by viewModels()
 
-    override fun initView() {
+    override fun initLayout() {
         initMapFragment()
         initGetData()
     }

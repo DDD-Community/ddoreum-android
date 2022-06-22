@@ -2,6 +2,7 @@ package com.project.ddoreum.challenge
 
 import com.project.ddoreum.R
 import com.project.ddoreum.core.BaseFragment
+import com.project.ddoreum.core.BaseViewModel
 import com.project.ddoreum.databinding.FragmentChallengeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -13,6 +14,9 @@ class ChallengeFragment : BaseFragment<FragmentChallengeBinding>(R.layout.fragme
         fun newInstance() = ChallengeFragment()
     }
 
-    override fun initView() {
+    override val viewModel: BaseViewModel
+        get() = TODO("Not yet implemented")
+
+    override fun initLayout() {
     }
 }
