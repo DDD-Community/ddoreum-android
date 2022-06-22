@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.Ddoreum" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -7,7 +7,7 @@
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -21,7 +21,57 @@
     </style>
 
     <style name="BottomNavStyle.TextAppearance">
-        <item name="android:textSize">10dp</item>
+        <item name="android:textSize">@dimen/font_bottom_navigation</item>
         <item name="android:textStyle">normal</item>
     </style>
+
+    <!-- Font -->
+
+    <style name="Ddoreum.Font" parent="Theme.Ddoreum">
+        <item name="textAppearanceHeadline1">@style/Ddoreum.Font.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/Ddoreum.Font.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/Ddoreum.Font.Headline3</item>
+        <item name="textAppearanceSubhead1">@style/Ddoreum.Font.Subhead1</item>
+        <item name="textAppearanceBody1">@style/Ddoreum.Font.Body1</item>
+        <item name="textAppearanceBody2">@style/Ddoreum.Font.Body2</item>
+        <item name="textAppearanceCaption">@style/Ddoreum.Font.Description</item>
+
+    </style>
+
+    <style name="Ddoreum.Font.Headline1">
+        <item name="android:textSize">@dimen/ddoreum_font_headline1</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Ddoreum.Font.Headline2">
+        <item name="android:textSize">@dimen/ddoreum_font_headline2</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Ddoreum.Font.Headline3">
+        <item name="android:textSize">@dimen/ddoreum_font_headline3</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Ddoreum.Font.Body1">
+        <item name="android:textSize">@dimen/ddoreum_font_body1</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Ddoreum.Font.Body2">
+        <item name="android:textSize">@dimen/ddoreum_font_body2</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Ddoreum.Font.Subhead1">
+        <item name="android:textSize">@dimen/ddoreum_font_subhead1</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Ddoreum.Font.Description">
+        <item name="android:textSize">@dimen/ddoreum_font_description</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
 </resources>
