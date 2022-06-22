@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val layoutId: Int) :
-    Fragment() {
+abstract class BaseBottomSheetFragment<T : ViewDataBinding>(@LayoutRes private val layoutId: Int) :
+    BottomSheetDialogFragment() {
 
     lateinit var binding: T
 

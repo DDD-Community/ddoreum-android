@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.DialogFragment
 
-abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val layoutId: Int) :
-    Fragment() {
+abstract class BaseDialogFragment<T : ViewDataBinding>(@LayoutRes private val layoutId: Int) :
+    DialogFragment() {
 
     lateinit var binding: T
 
