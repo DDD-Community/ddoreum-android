@@ -10,7 +10,9 @@ import com.project.ddoreum.home.HomeFragment
 import com.project.ddoreum.mountaininfo.MountainInfoFragment
 import com.project.ddoreum.mypage.MyPageFragment
 import com.project.ddoreum.record.RecordFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
