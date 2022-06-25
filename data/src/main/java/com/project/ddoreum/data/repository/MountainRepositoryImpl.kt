@@ -14,14 +14,14 @@ class MountainRepositoryImpl @Inject constructor(
     private val mountainDataSource: MountainDataSource
 ): MountainRepository {
 
-    override suspend fun getAllMountainInfo(): Flow<ArrayList<MountainInfoData>> {
+    override suspend fun getAllMountainInfo(): Flow<ArrayList<MountainInfoData>?> {
         val result = mountainDataSource.getAllMountainInfo()
         return if (result.status == ApiResult.Status.SUCCESS) {
             flow {
                 emit(
-                    result.responseData!!.map { resMountainInfo ->
+                    result.responseData?.map { resMountainInfo ->
                         resMountainInfo.mapToEntity()
-                    }.toCollection(arrayListOf())
+                    }?.toCollection(arrayListOf())
                 )
             }
         } else {

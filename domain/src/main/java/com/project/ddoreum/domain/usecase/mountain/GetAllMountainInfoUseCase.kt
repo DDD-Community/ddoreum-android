@@ -8,9 +8,9 @@ import javax.inject.Inject
 
 class GetAllMountainInfoUseCase @Inject constructor(
     private val mountainRepository: MountainRepository
-) : FlowUseCase<Unit, ArrayList<MountainInfoData>>() {
+) : FlowUseCase<Unit, ArrayList<MountainInfoData>?>() {
 
-    override suspend fun execute(param: Unit): Flow<ArrayList<MountainInfoData>> {
+    override suspend fun execute(param: Unit): Flow<ArrayList<MountainInfoData>?> {
         return mountainRepository.getAllMountainInfo()
     }
 

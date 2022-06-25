@@ -10,7 +10,7 @@ class MountainDataSourceImpl @Inject constructor(
     private val service: MountainService
 ) : MountainDataSource {
 
-    override suspend fun getAllMountainInfo(): ApiResult<ArrayList<ResMountainInfo>> = getResult {
+    override suspend fun getAllMountainInfo(): ApiResult<ArrayList<ResMountainInfo>?> = getResult {
         service.getAllMountainsInfo()
     }
 
