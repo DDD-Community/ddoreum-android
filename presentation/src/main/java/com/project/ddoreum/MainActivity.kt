@@ -1,23 +1,26 @@
 package com.project.ddoreum
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commitNow
 import com.project.ddoreum.challenge.ChallengeFragment
 import com.project.ddoreum.core.BaseActivity
+import com.project.ddoreum.core.BaseViewModel
 import com.project.ddoreum.databinding.ActivityMainBinding
 import com.project.ddoreum.home.HomeFragment
 import com.project.ddoreum.mountaininfo.MountainInfoFragment
 import com.project.ddoreum.mypage.MyPageFragment
 import com.project.ddoreum.record.RecordFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override val viewModel: BaseViewModel
+        get() = TODO("Not yet implemented")
+
+    override fun initLayout() {
         setUpNavigation()
         initFragment()
-
     }
 
     private fun setUpNavigation() = with(binding) {
