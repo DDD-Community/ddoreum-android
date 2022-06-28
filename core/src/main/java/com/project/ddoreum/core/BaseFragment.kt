@@ -14,7 +14,7 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val layoutId
 
     lateinit var binding: T
 
-//    protected abstract val viewModel: BaseViewModel
+    protected abstract val viewModel: BaseViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +25,7 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val layoutId
         return binding.root
     }
 
-//    protected abstract fun initLayout()
+    protected abstract fun initLayout()
 
     protected fun bind(action: T.() -> Unit) {
         binding.run(action)

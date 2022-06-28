@@ -1,10 +1,10 @@
 package com.project.ddoreum
 
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commitNow
 import com.project.ddoreum.challenge.ChallengeFragment
 import com.project.ddoreum.core.BaseActivity
-import com.project.ddoreum.core.BaseViewModel
 import com.project.ddoreum.databinding.ActivityMainBinding
 import com.project.ddoreum.home.HomeFragment
 import com.project.ddoreum.mountaininfo.MountainInfoFragment
@@ -15,30 +15,38 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    override val viewModel: BaseViewModel
-        get() = TODO("Not yet implemented")
+    override val viewModel: MainViewModel by viewModels()
 
     override fun initLayout() {
         setUpNavigation()
-        initFragment()
-    }
 
-    override fun initLayout() {
         val currentFragment = supportFragmentManager.primaryNavigationFragment
         if (currentFragment == null) {
             changeFragment(HomeFragment.newInstance(), HomeFragment.toString())
         }
-
     }
 
     private fun setUpNavigation() = with(binding) {
         bottomNavView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.nav_home -> changeFragment(HomeFragment.newInstance(), HomeFragment.toString())
-                R.id.nav_record -> changeFragment(RecordFragment.newInstance(), RecordFragment.toString())
-                R.id.nav_mountain_info -> changeFragment(MountainInfoFragment.newInstance(), MountainInfoFragment.toString())
-                R.id.nav_challenge -> changeFragment(ChallengeFragment.newInstance(), ChallengeFragment.toString())
-                R.id.nav_my_page -> changeFragment(MyPageFragment.newInstance(), MyPageFragment.toString())
+                R.id.nav_home -> {
+                    changeFragment(HomeFragment.newInstance(), HomeFragment.toString())
+                }
+                R.id.nav_record -> {
+                    changeFragment(RecordFragment.newInstance(), RecordFragment.toString())
+                }
+                R.id.nav_mountain_info -> {
+                    changeFragment(
+                        MountainInfoFragment.newInstance(),
+                        MountainInfoFragment.toString()
+                    )
+                }
+                R.id.nav_challenge -> {
+                    changeFragment(ChallengeFragment.newInstance(), ChallengeFragment.toString())
+                }
+                R.id.nav_my_page -> {
+                    changeFragment(MyPageFragment.newInstance(), MyPageFragment.toString())
+                }
             }
             return@setOnNavigationItemSelectedListener true
         }

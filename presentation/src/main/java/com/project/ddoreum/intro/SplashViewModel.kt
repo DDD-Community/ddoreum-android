@@ -31,7 +31,21 @@ class SplashViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun setPermissionCompleted() {
-        _state.value = SplashState.Finish
+        _titleState.value = true
+        viewModelScope.launch {
+            _state.emit(SplashState.Login)
+        }
     }
 
+    fun setPermissionRejected() {
+        viewModelScope.launch {
+            _state.emit(SplashState.RejectPermission)
+        }
+    }
+
+    fun onClickLogin() {
+        viewModelScope.launch {
+            _state.emit(SplashState.Finish)
+        }
+    }
 }

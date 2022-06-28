@@ -2,4 +2,7 @@
     <string name="app_name">ddoreum</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Intro -->
+    <string name="splash_title">서비스 이용을 위해\n필요한 권한을 허용해주세요</string>
 </resources>

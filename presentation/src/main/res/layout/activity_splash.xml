@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -12,13 +13,13 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        bind:splash_background_color="@{vm.titleState}"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_splash_transition"
+        bind:splash_background="@{vm.titleState}">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/title"
-            bind:selected="@{vm.titleState}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/selector_splash_title"
@@ -26,11 +27,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_splash_colored" />
+            bind:selected="@{vm.titleState}" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/sign"
-            bind:visible="@{vm.titleState}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="273dp"
@@ -39,6 +39,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{() -> vm.onClickLogin()}"
+            bind:visible="@{vm.titleState}"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

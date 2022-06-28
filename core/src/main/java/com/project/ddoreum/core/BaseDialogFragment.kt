@@ -16,6 +16,10 @@ abstract class BaseDialogFragment<T : ViewDataBinding>(@LayoutRes private val la
 
     protected abstract val viewModel: BaseViewModel
 
+    lateinit var listener: (Any?) -> Unit
+    open val isListenerInitialized: Boolean
+        get() = this::listener.isInitialized
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
