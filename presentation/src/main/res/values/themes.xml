@@ -44,7 +44,7 @@
         <item name="android:layout_marginStart">20dp</item>
         <item name="android:layout_marginEnd">20dp</item>
         <item name="android:layout_marginBottom">25dp</item>
-        <item name="android:text">"확인"</item>
+        <item name="android:text">@string/confirm</item>
         <item name="android:background">@drawable/bg_button</item>
         <item name="android:height">48dp</item>
         <item name="android:textStyle">bold</item>

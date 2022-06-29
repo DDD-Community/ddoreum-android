@@ -61,9 +61,10 @@ class SplashPermissionDialog :
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
-            .setDeniedTitle("이용에 대한 액세스 권한이 없어요")
-            .setDeniedMessage("앱 설정으로 가서 액세스 권한을 수정 할 수 있어요.\n이동하시겠어요?")
-            .setDeniedCloseButtonText("닫기")
+            .setDeniedTitle(R.string.permission_noti_popup_title)
+            .setDeniedMessage(R.string.permission_noti_popup_description)
+            .setGotoSettingButtonText(R.string.permission_noti_popup_setting)
+            .setDeniedCloseButtonText(R.string.close)
             .check()
 
         if (permissionResult.isGranted) {

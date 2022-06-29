@@ -64,6 +64,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
                 SplashPermissionDialog
                     .newInstance()
                     .show(supportFragmentManager, SplashPermissionDialog.TAG)
+                return
             }
         }
         viewModel.setPermissionCompleted()
