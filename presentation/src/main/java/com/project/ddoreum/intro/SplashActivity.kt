@@ -1,7 +1,10 @@
 package com.project.ddoreum.intro
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.project.ddoreum.MainActivity
 import com.project.ddoreum.R
@@ -51,9 +54,19 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     private fun setupPermissionPopup() {
-        SplashPermissionDialog
-            .newInstance()
-            .show(supportFragmentManager, SplashPermissionDialog.TAG)
+        listOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ).forEach {
+            if (ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED) {
+                SplashPermissionDialog
+                    .newInstance()
+                    .show(supportFragmentManager, SplashPermissionDialog.TAG)
+            }
+        }
+        viewModel.setPermissionCompleted()
     }
 
     private fun setupLogin() {

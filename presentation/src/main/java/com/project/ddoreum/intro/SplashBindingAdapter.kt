@@ -28,10 +28,11 @@ fun View.bindSplashTitleConfig(isApplied: Boolean?) {
 
     if (isApplied == true) {
         animate()
-            .translationY(-100.dp.toFloat())
-            .setDuration(500)
+            .translationY(-130.dp.toFloat())
+            .setDuration(1000)
+            .alpha(1f)
             .withEndAction {
-                translationY = -100.dp.toFloat()
+                translationY = -130.dp.toFloat()
             }
     }
 }
