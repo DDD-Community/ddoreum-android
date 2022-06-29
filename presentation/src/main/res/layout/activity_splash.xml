@@ -23,23 +23,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/selector_splash_title"
-            app:layout_constraintBottom_toTopOf="@id/sign"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:selected="@{vm.titleState}" />
+            bind:splash_title_config="@{vm.titleState}" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/sign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="273dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:onClick="@{() -> vm.onClickLogin()}"
             android:src="@drawable/ic_sign_in_google"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{() -> vm.onClickLogin()}"
             bind:visible="@{vm.titleState}"
             tools:visibility="visible" />
 

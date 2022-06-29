@@ -24,7 +24,7 @@ class SplashViewModel @Inject constructor() : BaseViewModel() {
     fun initSplash() {
         _titleState.value = false
         viewModelScope.launch {
-            delay(1000)
+            delay(500)
 
             _state.emit(SplashState.Permission)
         }
@@ -43,6 +43,8 @@ class SplashViewModel @Inject constructor() : BaseViewModel() {
         }
     }
 
+    // TODO : 로그인 로직으로 이동해야 함
+    // 우선 메인액티비티로 이동
     fun onClickLogin() {
         viewModelScope.launch {
             _state.emit(SplashState.Finish)

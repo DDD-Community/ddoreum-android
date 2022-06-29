@@ -9,7 +9,6 @@ import com.project.ddoreum.core.BaseActivity
 import com.project.ddoreum.databinding.ActivitySplashBinding
 import com.project.ddoreum.intro.permission.SplashPermissionDialog
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -21,7 +20,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         bind {
             vm = viewModel
             lifecycleOwner = this@SplashActivity
-
         }
 
         lifecycleScope.launch {
@@ -49,6 +47,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
     private fun startMainActivity() {
         startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     private fun setupPermissionPopup() {
@@ -57,9 +56,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             .show(supportFragmentManager, SplashPermissionDialog.TAG)
     }
 
-
     private fun setupLogin() {
-        // TODO : 로그인 뷰 확인
-
+        // TODO : 로그인 뷰 확인 이후 로직 필요
     }
 }

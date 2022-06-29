@@ -10,7 +10,6 @@ import com.project.ddoreum.core.BaseDialogFragment
 import com.project.ddoreum.databinding.DialogSplashPermissionBinding
 import com.project.ddoreum.intro.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
