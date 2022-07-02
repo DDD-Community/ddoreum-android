@@ -15,6 +15,7 @@
         <entry key="presentation/src/main/res/drawable/bottomnav_item_color.xml" value="0.156" />
         <entry key="presentation/src/main/res/drawable/dialog_splash_permission.xml" value="0.545" />
         <entry key="presentation/src/main/res/drawable/ic_permission_call.xml" value="0.545" />
+        <entry key="presentation/src/main/res/drawable/ic_pin.xml" value="0.2685" />
         <entry key="presentation/src/main/res/drawable/ic_record_selected.xml" value="0.156" />
         <entry key="presentation/src/main/res/drawable/ic_record_unselected.xml" value="0.156" />
         <entry key="presentation/src/main/res/drawable/selector_splash_title.xml" value="0.545" />
