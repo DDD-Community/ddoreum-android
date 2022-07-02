@@ -3,5 +3,6 @@
 
     <attr name="textAppearanceSubhead1" format="reference" />
     <attr name="textAppearanceDescription" format="reference" />
+    <attr name="bind" format="reference" />
 
 </resources>
