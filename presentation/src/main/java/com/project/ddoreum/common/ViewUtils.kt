@@ -8,8 +8,12 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 
 fun String.highLightWord(forceWord: String, color: Int): SpannableString {
     return SpannableString(this).apply {
@@ -43,4 +47,13 @@ fun View.hideKeyboard() {
 fun View.showKeyboard(){
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+}
+
+fun <T : ViewDataBinding> viewBind(parent: ViewGroup, layoutRes: Int): T {
+    return DataBindingUtil.inflate(
+        LayoutInflater.from(parent.context),
+        layoutRes,
+        parent,
+        false
+    )
 }

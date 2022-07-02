@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="com.project.ddoreum.domain.entity.mountain.MountainInfoData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+
+        <TextView
+            android:id="@+id/tv_mountain_name"
+            style="@style/Ddoreum.Font.MountainTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{data.mountainInfo.name}"
+            tools:text="도봉산" />
+
+        <TextView
+            android:id="@+id/tv_mountain_address"
+            style="@style/Ddoreum.Font.MountainSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mountain_name"
+            tools:text="서울시 도봉구" />
+
+        <TextView
+            android:id="@+id/tv_mountain_elevation"
+            style="@style/Ddoreum.Font.MountainSubTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_mountain_address"
+            app:layout_constraintStart_toEndOf="@+id/tv_mountain_address"
+            app:layout_constraintTop_toTopOf="@+id/tv_mountain_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="839m" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/gray_02"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mountain_address" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
