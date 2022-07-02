@@ -5,13 +5,18 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.project.ddoreum.MainActivity
 import com.project.ddoreum.R
 import com.project.ddoreum.core.BaseActivity
 import com.project.ddoreum.databinding.ActivitySplashBinding
+import com.project.ddoreum.di.MainDispatcher
 import com.project.ddoreum.intro.permission.SplashPermissionDialog
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -19,29 +24,35 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
     override val viewModel: SplashViewModel by viewModels()
 
+    @Inject
+    @MainDispatcher
+    lateinit var mainDispatcher: CoroutineDispatcher
+
     override fun initLayout() {
         bind {
             vm = viewModel
             lifecycleOwner = this@SplashActivity
         }
 
-        lifecycleScope.launch {
-            viewModel.state.collect { state ->
-                when (state) {
-                    SplashState.Init -> {
-                        viewModel.initSplash()
-                    }
-                    SplashState.Permission -> {
-                        setupPermissionPopup()
-                    }
-                    SplashState.Login -> {
-                        setupLogin()
-                    }
-                    SplashState.RejectPermission -> {
-                        finishAffinity()
-                    }
-                    SplashState.Finish -> {
-                        startMainActivity()
+        lifecycleScope.launch(mainDispatcher) {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collect { state ->
+                    when (state) {
+                        SplashState.Init -> {
+                            viewModel.initSplash()
+                        }
+                        SplashState.Permission -> {
+                            setupPermissionPopup()
+                        }
+                        SplashState.Login -> {
+                            setupLogin()
+                        }
+                        SplashState.RejectPermission -> {
+                            finishAffinity()
+                        }
+                        SplashState.Finish -> {
+                            startMainActivity()
+                        }
                     }
                 }
             }
