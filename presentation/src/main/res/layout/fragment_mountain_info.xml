@@ -40,9 +40,8 @@
                     android:layout_marginStart="8dp"
                     android:paddingStart="8dp"
                     android:text="산 정보"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                    style="@style/Ddoreum.Font.Headline3"
+                    />
 
                 <ImageView
                     android:id="@+id/iv_switch_map_list"

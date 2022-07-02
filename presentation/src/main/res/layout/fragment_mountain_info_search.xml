@@ -7,14 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".mountaininfo.search.MountainInfoSearchFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tb_layout_search_filter"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/white"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabBackground="@color/transparent"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/black"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
+        app:tabRippleColor="@color/transparent"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextColor="@color/black" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_search_filter"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="검색 화면입니당"/>
+        app:layout_constraintTop_toBottomOf="@+id/tb_layout_search_filter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
