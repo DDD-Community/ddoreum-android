@@ -63,40 +63,48 @@
         <item name="textAppearanceBody1">@style/Ddoreum.Font.Body1</item>
         <item name="textAppearanceBody2">@style/Ddoreum.Font.Body2</item>
         <item name="textAppearanceDescription">@style/Ddoreum.Font.Description</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="Ddoreum.Font.Headline1">
         <item name="android:textSize">@dimen/ddoreum_font_headline1</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_bold</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Ddoreum.Font.Headline2">
         <item name="android:textSize">@dimen/ddoreum_font_headline2</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_bold</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Ddoreum.Font.Headline3">
         <item name="android:textSize">@dimen/ddoreum_font_headline3</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_bold</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Ddoreum.Font.Body1">
         <item name="android:textSize">@dimen/ddoreum_font_body1</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_regular</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Ddoreum.Font.Body2">
         <item name="android:textSize">@dimen/ddoreum_font_body2</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_regular</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Ddoreum.Font.Subhead1">
         <item name="android:textSize">@dimen/ddoreum_font_subhead1</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_bold</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Ddoreum.Font.Description">
         <item name="android:textSize">@dimen/ddoreum_font_description</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_regular</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
