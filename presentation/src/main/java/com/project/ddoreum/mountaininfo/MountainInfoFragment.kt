@@ -1,38 +1,76 @@
 package com.project.ddoreum.mountaininfo
 
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.commitNow
 import androidx.fragment.app.viewModels
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.project.ddoreum.R
 import com.project.ddoreum.core.BaseFragment
 import com.project.ddoreum.databinding.FragmentMountainInfoBinding
+import com.project.ddoreum.home.HomeFragment
+import com.project.ddoreum.mountaininfo.list.MountainInfoListFragment
+import com.project.ddoreum.mountaininfo.map.MountainInfoMapFragment
+import com.project.ddoreum.mountaininfo.search.MountainInfoSearchFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class MountainInfoFragment : BaseFragment<FragmentMountainInfoBinding>(R.layout.fragment_mountain_info), OnMapReadyCallback {
+class MountainInfoFragment :
+    BaseFragment<FragmentMountainInfoBinding>(R.layout.fragment_mountain_info) {
 
     override val viewModel: MountainInfoViewModel by viewModels()
 
     override fun initLayout() {
-        initMapFragment()
+        bind {
+            viewmodel = viewModel
+        }
+        initFragment()
         initGetData()
+        ininCollect()
+    }
+
+    private fun ininCollect() {
     }
 
     private fun initGetData() {
         viewModel.getAllMountainInfo()
     }
 
-    private fun initMapFragment() {
-        val mapFragment = childFragmentManager.findFragmentById(R.id.mapView) as MapFragment?
-            ?: MapFragment.newInstance().also {
-                childFragmentManager.beginTransaction().add(R.id.mapView, it).commit()
-            }
-        mapFragment?.getMapAsync(this)
+    private fun initFragment() {
+        val currentFragment = parentFragmentManager.primaryNavigationFragment
+        if (currentFragment == null) {
+            changeFragment(MountainInfoMapFragment.newInstance(), MountainInfoMapFragment.TAG)
+        }
     }
 
-    override fun onMapReady(naverMap: NaverMap) {
-        val defaultPosition = LatLng(37.52732472751029, 126.9804849269383)
-        naverMap.moveCamera(CameraUpdate.scrollAndZoomTo(defaultPosition, 12.0))
+    private fun changeFragment(fragment: Fragment, tagFragmentName: String?) {
+        parentFragmentManager.commitNow(true) {
+            val currentFragment = parentFragmentManager.primaryNavigationFragment
+            if (currentFragment != null) {
+                hide(currentFragment)
+            }
+
+            var newFragment = parentFragmentManager.findFragmentByTag(tagFragmentName)
+            if (newFragment == null) {
+                newFragment = fragment
+                add(R.id.mountain_info_container, newFragment, tagFragmentName)
+            } else {
+                show(newFragment)
+            }
+
+            setPrimaryNavigationFragment(newFragment)
+            setReorderingAllowed(true)
+        }
+    }
+
+    private fun initDefaultFragment() {
+        parentFragmentManager.commitNow(true) {
+            add(MountainInfoMapFragment.newInstance(), MountainInfoMapFragment.TAG)
+            add(MountainInfoListFragment.newInstance(), MountainInfoListFragment.TAG)
+            add(MountainInfoSearchFragment.newInstance(), MountainInfoSearchFragment.TAG)
+        }
     }
 
     companion object {

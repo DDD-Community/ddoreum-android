@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.project.ddoreum.mountaininfo.MountainInfoViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,15 +41,17 @@
                     android:text="산 정보"
                     android:textColor="@color/black"
                     android:textSize="16dp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
 
                 <ImageView
+                    android:id="@+id/iv_switch_map_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
+                    android:onClick="@{(view)->viewmodel.switchMainViewType('main')}"
                     android:src="@drawable/ic_list" />
 
             </androidx.appcompat.widget.Toolbar>
@@ -58,29 +66,43 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appbar_mountain_info">
 
-            <androidx.appcompat.widget.SearchView
-                android:layout_width="match_parent"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_search_view"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="12dp"
-                android:background="@color/gray_deep"
+                android:elevation="0dp"
+                android:transitionName="shared_search_view"
+                app:cardBackgroundColor="@color/gray_01"
+                app:cardCornerRadius="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintCircleRadius="6dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    app:defaultQueryHint="어떤 산을 찾고 계세요?"
+                    app:iconifiedByDefault="false"
+                    app:queryBackground="@color/gray_01"
+                    android:onClick="@{()->viewmodel.switchMainViewTypeToSearch()}"
+                    app:searchIcon="@null" />
+            </androidx.cardview.widget.CardView>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.naver.maps.map.MapView
-            android:id="@+id/mapView"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/mountain_info_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_search" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_search"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

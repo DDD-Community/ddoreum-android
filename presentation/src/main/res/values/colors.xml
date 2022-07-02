@@ -16,4 +16,6 @@
 
     <color name="bottomNavSelectColor">#0C0D0D</color>
     <color name="bottomNavUnselectColor">#343434</color>
+
+    <color name="gray_01">#F2F2F2</color>
 </resources>
