@@ -1,16 +1,19 @@
 package com.project.ddoreum.mountaininfo.map
 
+import androidx.fragment.app.viewModels
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.project.ddoreum.R
+import com.project.ddoreum.common.repeatCallDefaultOnStarted
 import com.project.ddoreum.core.BaseFragment
-import com.project.ddoreum.core.BaseViewModel
 import com.project.ddoreum.databinding.FragmentMountainInfoMapBinding
+import com.project.ddoreum.mountaininfo.MountainInfoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MountainInfoMapFragment : BaseFragment<FragmentMountainInfoMapBinding>(R.layout.fragment_mountain_info_map), OnMapReadyCallback {
 
     companion object {
@@ -18,11 +21,17 @@ class MountainInfoMapFragment : BaseFragment<FragmentMountainInfoMapBinding>(R.l
         fun newInstance() = MountainInfoMapFragment()
     }
 
-    override val viewModel: BaseViewModel
-        get() = TODO("Not yet implemented")
+    override val viewModel: MountainInfoMapViewModel by viewModels()
+
+    private val sharedViewModel: MountainInfoViewModel by viewModels({requireParentFragment()})
 
     override fun initLayout() {
         initMapFragment()
+        viewLifecycleOwner.repeatCallDefaultOnStarted {
+            sharedViewModel.mountainList.collect {
+
+            }
+        }
     }
 
     private fun initMapFragment() {
