@@ -19,10 +19,28 @@ class MountainInfoViewModel @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): BaseViewModel() {
 
+    private val _mainViewType = MutableStateFlow<MainViewType>(MainViewType.MapType)
+    val mainViewType : StateFlow<MainViewType> get() = _mainViewType
+
     fun getAllMountainInfo() {
         viewModelScope.launch (ioDispatcher) {
             getAllMountainInfoUseCase.invoke(Unit)
         }
+    }
+
+    fun switchMainViewType() = run {
+        when (_mainViewType.value) {
+            MainViewType.MapType -> {
+                _mainViewType.update { MainViewType.ListType }
+            }
+            MainViewType.ListType -> {
+                _mainViewType.update { MainViewType.MapType }
+            }
+        }
+    }
+
+    fun switchMainViewTypeToSearch() = run {
+        _mainViewType.update { MainViewType.SearchType }
     }
 
 }
