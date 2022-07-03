@@ -11,6 +11,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".mountaininfo.MountainInfoFragment">
@@ -35,13 +36,12 @@
                     android:src="@drawable/ic_back" />
 
                 <TextView
+                    style="@style/Ddoreum.Font.Headline3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:paddingStart="8dp"
-                    android:text="산 정보"
-                    style="@style/Ddoreum.Font.Headline3"
-                    />
+                    android:text="산 정보" />
 
                 <ImageView
                     android:id="@+id/iv_switch_map_list"
@@ -85,8 +85,8 @@
                     android:id="@+id/search_view"
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
-                    app:defaultQueryHint="어떤 산을 찾고 계세요?"
                     app:iconifiedByDefault="false"
+                    app:defaultQueryHint="어떤 산을 찾고 계세요?"
                     app:queryBackground="@color/gray_01"
                     app:searchIcon="@null" />
             </androidx.cardview.widget.CardView>

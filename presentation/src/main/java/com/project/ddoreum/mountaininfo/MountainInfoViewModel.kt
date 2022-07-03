@@ -1,6 +1,5 @@
 package com.project.ddoreum.mountaininfo
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.project.ddoreum.core.BaseViewModel
 import com.project.ddoreum.di.IoDispatcher

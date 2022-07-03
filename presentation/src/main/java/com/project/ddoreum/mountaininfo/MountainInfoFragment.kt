@@ -72,9 +72,14 @@ class MountainInfoFragment :
         changeFragment(mountainInfoViewFragmentList[1])
     }
 
-    private fun initSearchView() {
-        binding.searchView.setOnSearchClickListener {
-            viewModel.switchMainViewTypeToSearch()
+    private fun initSearchView() = with(binding.searchView) {
+        isFocusable = false
+        isIconified = false
+        clearFocus()
+        setOnQueryTextFocusChangeListener { view, b ->
+            if (b) {
+                viewModel.switchMainViewTypeToSearch()
+            }
         }
     }
 
