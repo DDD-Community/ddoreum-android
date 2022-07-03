@@ -1,6 +1,7 @@
 package com.project.ddoreum.data.datasource.mountain
 
 import com.project.ddoreum.data.getResult
+import com.project.ddoreum.data.model.ResMountainDetailInfo
 import com.project.ddoreum.data.model.ResMountainInfo
 import com.project.ddoreum.data.service.MountainService
 import com.project.ddoreum.domain.ApiResult
@@ -12,6 +13,10 @@ class MountainDataSourceImpl @Inject constructor(
 
     override suspend fun getAllMountainInfo(): ApiResult<ArrayList<ResMountainInfo>?> = getResult {
         service.getAllMountainsInfo()
+    }
+
+    override suspend fun getMountainDetailInfo(name: String): ApiResult<ResMountainDetailInfo?> = getResult {
+        service.getMountainDetailInfo(name)
     }
 
 }

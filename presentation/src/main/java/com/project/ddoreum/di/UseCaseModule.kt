@@ -2,6 +2,7 @@ package com.project.ddoreum.di
 
 import com.project.ddoreum.domain.repository.MountainRepository
 import com.project.ddoreum.domain.usecase.mountain.GetAllMountainInfoUseCase
+import com.project.ddoreum.domain.usecase.mountain.GetMountainDetailInfoUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,4 +17,7 @@ object UseCaseModule {
     @ViewModelScoped
     fun provideGetAllMountainInfoUseCase(mountainRepository: MountainRepository) = GetAllMountainInfoUseCase(mountainRepository)
 
+    @Provides
+    @ViewModelScoped
+    fun provideGetMountainDetailInfoUseCase(mountainRepository: MountainRepository) = GetMountainDetailInfoUseCase(mountainRepository)
 }
