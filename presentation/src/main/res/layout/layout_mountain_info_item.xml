@@ -15,6 +15,24 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
 
+       <androidx.cardview.widget.CardView
+           android:id="@+id/cv_mountain_img"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintBottom_toBottomOf="parent"
+           android:layout_marginTop="21.5dp"
+           android:layout_marginBottom="21.5dp"
+           app:cardCornerRadius="8dp">
+
+           <ImageView
+               android:layout_width="32dp"
+               android:layout_height="32dp"
+               app:loadDetailImage="@{data.mountainInfo.mountainImage}"
+               />
+
+       </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tv_mountain_name"
@@ -22,7 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/cv_mountain_img"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@{data.mountainInfo.name}"
             tools:text="도봉산" />
@@ -35,7 +54,7 @@
             android:layout_marginTop="2dp"
             android:maxLines="1"
             android:ellipsize="end"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_mountain_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_mountain_name"
             tools:text="서울시 도봉구" />
 
