@@ -1,5 +1,7 @@
 package com.project.ddoreum.data
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.project.ddoreum.data.ApiErrorCase.COMMON_ERROR
 import com.project.ddoreum.data.ApiErrorCase.HTTP_EXCEPTION_ERROR
 import com.project.ddoreum.data.ApiErrorCase.NETWORK_ERROR
@@ -33,3 +35,5 @@ object ApiErrorCase {
     const val HTTP_EXCEPTION_ERROR = "http_exception_error"
     const val NETWORK_ERROR = "network_error"
 }
+
+inline fun <reified T> Gson.fromJson(json:String): T = fromJson<T>(json, object: TypeToken<T>() {}.type)
