@@ -1,5 +1,6 @@
 package com.project.ddoreum.di
 
+import com.project.ddoreum.data.datasource.local.LocalDataSource
 import com.project.ddoreum.data.datasource.mountain.MountainDataSource
 import com.project.ddoreum.data.repository.MountainRepositoryImpl
 import com.project.ddoreum.domain.repository.MountainRepository
