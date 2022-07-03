@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.37083333333333335" />
+        <entry key="presentation/src/main/res/drawable-v24/background_radius_card_orange.xml" value="0.2685" />
         <entry key="presentation/src/main/res/drawable/background_radius_card.xml" value="0.2685" />
         <entry key="presentation/src/main/res/drawable/bg_bottomsheet.xml" value="0.545" />
         <entry key="presentation/src/main/res/drawable/bg_button.xml" value="0.322" />
