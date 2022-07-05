@@ -1,8 +1,7 @@
 package com.project.ddoreum.di
 
 import com.project.ddoreum.domain.repository.MountainRepository
-import com.project.ddoreum.domain.usecase.mountain.GetAllMountainInfoUseCase
-import com.project.ddoreum.domain.usecase.mountain.GetMountainDetailInfoUseCase
+import com.project.ddoreum.domain.usecase.mountain.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,4 +19,16 @@ object UseCaseModule {
     @Provides
     @ViewModelScoped
     fun provideGetMountainDetailInfoUseCase(mountainRepository: MountainRepository) = GetMountainDetailInfoUseCase(mountainRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetAllFavoriteMountainUseCase(mountainRepository: MountainRepository) = GetAllFavoriteMountainUseCase(mountainRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideAddFavoriteMountainUseCase(mountainRepository: MountainRepository) = AddFavoriteMountainUseCase(mountainRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideDeleteFavoriteMountainUseCase(mountainRepository: MountainRepository) = DeleteFavoriteMountainUseCase(mountainRepository)
 }

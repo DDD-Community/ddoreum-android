@@ -11,5 +11,6 @@ data class MountainDetailInfoData(
     val mountainImage: String?,
     val selectReason: String?,
     val subTitle: String?,
-    val transportNotice: String?
+    val transportNotice: String?,
+    var isFavorite: Boolean = false
 )

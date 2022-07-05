@@ -20,14 +20,17 @@ class LocalDataSourceImpl @Inject constructor(@ApplicationContext context: Conte
     private val favoriteMountainFlow = MutableStateFlow(favoriteMountainList)
 
     override fun addFavoriteMountain(data: MountainDetailInfoData) {
+        if (favoriteMountainList == null) {
+            favoriteMountainList = hashSetOf()
+        }
         favoriteMountainList = favoriteMountainList.apply {
-            add(data.mountainCode.toString())
+            this.add(data.mountainCode.toString())
         }
     }
 
     override fun deleteFavoriteMountain(data: MountainDetailInfoData) {
         favoriteMountainList = favoriteMountainList.apply {
-            remove(data.mountainCode.toString())
+            this.remove(data.mountainCode.toString())
         }
     }
 

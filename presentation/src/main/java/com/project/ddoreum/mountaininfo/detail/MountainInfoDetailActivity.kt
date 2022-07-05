@@ -1,7 +1,6 @@
 package com.project.ddoreum.mountaininfo.detail
 
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.project.ddoreum.R
 import com.project.ddoreum.core.BaseActivity
 import com.project.ddoreum.databinding.ActivityMountainInfoDetailBinding

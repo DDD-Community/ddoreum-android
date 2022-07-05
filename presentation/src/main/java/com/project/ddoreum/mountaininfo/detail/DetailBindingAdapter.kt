@@ -4,11 +4,13 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.request.target.CustomViewTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.button.MaterialButton
+import com.project.ddoreum.R
 import com.project.ddoreum.di.GlideApp
 import com.project.ddoreum.domain.entity.mountain.MountainDetailInfoData
 
@@ -35,8 +37,8 @@ fun TextView.bindSecondVisibleAndSetText(data: MountainDetailInfoData?) {
 }
 
 @BindingAdapter("loadDetailImage")
-fun setDetailImage(view: ImageView, url: String?){
-    if(!url.isNullOrEmpty()){
+fun setDetailImage(view: ImageView, url: String?) {
+    if (!url.isNullOrEmpty()) {
         GlideApp.with(view)
             .asBitmap()
             .load(url)
@@ -47,10 +49,10 @@ fun setDetailImage(view: ImageView, url: String?){
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     var resource = resource
                     val width = view.width
-                    if (resource.height > 0){
-                        val height = if (view.measuredHeight >= resource.height){
+                    if (resource.height > 0) {
+                        val height = if (view.measuredHeight >= resource.height) {
                             view.measuredHeight
-                        } else{
+                        } else {
                             width * resource.height / resource.height
                         }
                         resource = Bitmap.createScaledBitmap(resource, width, height, false)
@@ -58,5 +60,17 @@ fun setDetailImage(view: ImageView, url: String?){
                     view.setImageBitmap(resource)
                 }
             })
+    }
+}
+
+@BindingAdapter("setFavoriteMountain")
+fun ImageView.setFavoriteMountain(data: MountainDetailInfoData?) {
+    data?.let {
+        val src = if (it.isFavorite) {
+            ContextCompat.getDrawable(context, R.drawable.ic_favorite)
+        } else {
+            ContextCompat.getDrawable(context, R.drawable.ic_not_favorite)
+        }
+        setImageDrawable(src)
     }
 }
