@@ -20,8 +20,12 @@
         <entry key="presentation/src/main/res/drawable/selector_splash_title.xml" value="0.545" />
         <entry key="presentation/src/main/res/layout/activity_challenge_detail.xml" value="0.3859375" />
         <entry key="presentation/src/main/res/layout/activity_main.xml" value="0.3287750244140625" />
+<<<<<<< refs/remotes/origin/develop
         <entry key="presentation/src/main/res/layout/activity_mountain_info_detail.xml" value="0.17889492753623187" />
         <entry key="presentation/src/main/res/layout/activity_splash.xml" value="0.25574572127139367" />
+=======
+        <entry key="presentation/src/main/res/layout/activity_splash.xml" value="0.4981163267401437" />
+>>>>>>> [feature/2] Google Sign In API 연결
         <entry key="presentation/src/main/res/layout/dialog_splash_permission.xml" value="0.2610547782503683" />
         <entry key="presentation/src/main/res/layout/fragment_area_type.xml" value="0.22" />
         <entry key="presentation/src/main/res/layout/fragment_challenge.xml" value="0.29270833333333335" />
