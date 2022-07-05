@@ -3,11 +3,19 @@ package com.project.ddoreum.intro
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.Task
 import com.project.ddoreum.MainActivity
 import com.project.ddoreum.R
 import com.project.ddoreum.core.BaseActivity
@@ -19,6 +27,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
+
 @AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
 
@@ -27,6 +36,28 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     @Inject
     @MainDispatcher
     lateinit var mainDispatcher: CoroutineDispatcher
+
+    private val loginLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val task: Task<GoogleSignInAccount> =
+                GoogleSignIn.getSignedInAccountFromIntent(result.data)
+
+            viewModel.handleUserInformation(task)
+        }
+
+    lateinit var mGoogleSignInClient: GoogleSignInClient
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+    }
 
     override fun initLayout() {
         bind {
@@ -50,7 +81,19 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
                         SplashState.RejectPermission -> {
                             finishAffinity()
                         }
-                        SplashState.Finish -> {
+                        SplashState.FailLogin -> {
+                            Toast.makeText(
+                                this@SplashActivity,
+                                getString(R.string.login_failed),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        is SplashState.Finish -> {
+                            Toast.makeText(
+                                this@SplashActivity,
+                                getString(R.string.login_success, state.name),
+                                Toast.LENGTH_SHORT
+                            ).show()
                             startMainActivity()
                         }
                     }
@@ -82,6 +125,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     private fun setupLogin() {
-        // TODO : 로그인 뷰 확인 이후 로직 필요
+        loginLauncher.launch(mGoogleSignInClient.signInIntent)
     }
 }

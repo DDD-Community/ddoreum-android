@@ -118,4 +118,7 @@ dependencies {
 
     // Alternatively - use the following artifact without an Android dependency.
     implementation "androidx.preference:preference-ktx:1.1.1"
+    
+    //google sign in
+    implementation ("com.google.android.gms:play-services-auth:20.2.0")
 }
