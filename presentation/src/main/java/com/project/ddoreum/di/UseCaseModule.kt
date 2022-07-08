@@ -31,4 +31,8 @@ object UseCaseModule {
     @Provides
     @ViewModelScoped
     fun provideDeleteFavoriteMountainUseCase(mountainRepository: MountainRepository) = DeleteFavoriteMountainUseCase(mountainRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetMountainsInfoByKeywordUseCase(mountainRepository: MountainRepository) = GetMountainsInfoByKeywordUseCase(mountainRepository)
 }

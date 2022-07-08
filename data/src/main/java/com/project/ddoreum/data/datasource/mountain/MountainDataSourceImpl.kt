@@ -15,8 +15,16 @@ class MountainDataSourceImpl @Inject constructor(
         service.getAllMountainsInfo()
     }
 
-    override suspend fun getMountainDetailInfo(name: String): ApiResult<ResMountainDetailInfo?> = getResult {
+    override suspend fun getMountainDetailInfo(name: String): ApiResult<ResMountainDetailInfo?> = getResult (true) {
         service.getMountainDetailInfo(name)
+    }
+
+    override suspend fun getMountainsInfoByKeyword(
+        name: String?,
+        region: String?,
+        regionDetail: String?
+    ): ApiResult<ArrayList<ResMountainInfo>?> = getResult {
+        service.getMountainsInfoByKeyword(name, region, regionDetail)
     }
 
 }

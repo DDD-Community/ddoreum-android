@@ -5,6 +5,7 @@ import com.project.ddoreum.data.model.ResMountainInfo
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MountainService {
 
@@ -15,4 +16,11 @@ interface MountainService {
     suspend fun getMountainDetailInfo(
         @Path("name") name: String
     ): Response<ResMountainDetailInfo>
+
+    @GET("/v1/mountains/{name}")
+    suspend fun getMountainsInfoByKeyword(
+        @Path("name") name: String?,
+        @Query("region") region: String?,
+        @Query("regionDetail") regionDetail: String?
+    ): Response<ArrayList<ResMountainInfo>>
 }

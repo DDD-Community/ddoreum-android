@@ -86,6 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
                     app:iconifiedByDefault="false"
+                    app:setTextChangeListener="@{viewmodel}"
                     app:defaultQueryHint="어떤 산을 찾고 계세요?"
                     app:queryBackground="@color/gray_01"
                     app:searchIcon="@null" />

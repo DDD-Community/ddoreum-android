@@ -20,6 +20,7 @@ import com.project.ddoreum.domain.entity.mountain.MountainInfoData
 import com.project.ddoreum.mountaininfo.MountainInfoViewModel
 import com.project.ddoreum.mountaininfo.detail.MountainInfoDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.async
 
 @AndroidEntryPoint
 class MountainInfoMapFragment :
@@ -30,6 +31,7 @@ class MountainInfoMapFragment :
     private lateinit var map: NaverMap
     private lateinit var locationOverlay: LocationOverlay
     private var _prevMarker = Pair<Marker?, MountainInfoData?>(null, null)
+    private var markerList = arrayListOf<Marker>()
 
     companion object {
         val TAG = this::class.java.toString()
@@ -50,6 +52,7 @@ class MountainInfoMapFragment :
 
     private fun collectFlow() = viewLifecycleOwner.repeatCallDefaultOnResume {
         sharedViewModel.mountainList.collect {
+            clearAllMarker()
             setMountainPinMarker(it)
         }
     }
@@ -136,6 +139,7 @@ class MountainInfoMapFragment :
             marker.onClickListener(this@MountainInfoMapFragment, marker.position, it)
             marker.map = map
         }
+        markerList.add(marker)
     }
 
     private fun clickedMarker(latitude: Double, longitude: Double, data: MountainInfoData) {
@@ -148,4 +152,11 @@ class MountainInfoMapFragment :
         _prevMarker = marker to data
     }
 
+    private fun clearAllMarker() {
+        if (!markerList.isNullOrEmpty()) {
+            markerList.forEach {
+                it.map = null
+            }
+        }
+    }
 }

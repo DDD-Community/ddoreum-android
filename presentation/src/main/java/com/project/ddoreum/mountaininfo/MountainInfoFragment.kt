@@ -1,5 +1,6 @@
 package com.project.ddoreum.mountaininfo
 
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -28,7 +29,12 @@ class MountainInfoFragment :
         initFragment()
         initSearchView()
         observeFlow()
-        viewModel.getAllMountainInfo()
+        initRequestData()
+    }
+
+    private fun initRequestData() {
+        viewModel.initAllMountainData()
+        viewModel.getMountainsInfoByOrder()
     }
 
     private fun observeFlow() = viewLifecycleOwner.repeatCallDefaultOnCreated {
@@ -51,6 +57,10 @@ class MountainInfoFragment :
             }
             MainViewType.SearchType -> {
                 changeFragment(mountainInfoViewFragmentList[2])
+            }
+            MainViewType.SearchResultType -> {
+                changeFragment(mountainInfoViewFragmentList[1])
+                updateHeaderIcon(MainViewType.ListType)
             }
         }
     }
@@ -76,9 +86,19 @@ class MountainInfoFragment :
         isFocusable = false
         isIconified = false
         clearFocus()
-        setOnQueryTextFocusChangeListener { view, b ->
-            if (b) {
+        setOnQueryTextFocusChangeListener { _, isFocused ->
+            if (isFocused) {
                 viewModel.switchMainViewTypeToSearch()
+            } else {
+                if (query.isEmpty()) {
+                    viewModel.initAllMountainData()
+                }
+            }
+        }
+        findViewById<AppCompatImageView>(androidx.appcompat.R.id.search_close_btn).setOnClickListener {
+            viewModel.initAllMountainData()
+            apply {
+                setQuery("", false)
             }
         }
     }

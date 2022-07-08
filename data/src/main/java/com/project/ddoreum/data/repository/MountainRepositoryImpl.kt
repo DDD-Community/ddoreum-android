@@ -1,5 +1,6 @@
 package com.project.ddoreum.data.repository
 
+import com.project.ddoreum.data.ApiErrorCase
 import com.project.ddoreum.data.datasource.local.LocalDataSource
 import com.project.ddoreum.data.datasource.mountain.MountainDataSource
 import com.project.ddoreum.data.mapper.mapToEntity
@@ -42,6 +43,28 @@ class MountainRepositoryImpl @Inject constructor(
             }
         } else {
             emptyFlow()
+        }
+    }
+
+    override suspend fun getMountainsInfoByKeyword(
+        name: String?,
+        region: String?,
+        regionDetail: String?
+    ): Flow<ArrayList<MountainInfoData>?> {
+        val result = mountainDataSource.getMountainsInfoByKeyword(name, region, regionDetail)
+        return when (result.status) {
+            ApiResult.Status.SUCCESS -> {
+                flow {
+                    emit(
+                        result.responseData?.map { resMountainInfo ->
+                            resMountainInfo.mapToEntity()
+                        }?.toCollection(arrayListOf())
+                    )
+                }
+            }
+            ApiResult.Status.ERROR -> {
+                emptyFlow()
+            }
         }
     }
 
