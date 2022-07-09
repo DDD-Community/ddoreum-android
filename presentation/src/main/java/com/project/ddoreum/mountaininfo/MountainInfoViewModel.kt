@@ -5,6 +5,7 @@ import com.project.ddoreum.common.SearchKeywordUtil
 import com.project.ddoreum.core.BaseViewModel
 import com.project.ddoreum.di.IoDispatcher
 import com.project.ddoreum.domain.entity.mountain.MountainInfoData
+import com.project.ddoreum.domain.entity.request.SearchRequestParams
 import com.project.ddoreum.domain.usecase.mountain.GetAllMountainInfoUseCase
 import com.project.ddoreum.domain.usecase.mountain.GetMountainsInfoByKeywordUseCase
 import com.project.ddoreum.mountaininfo.state.MainViewType
@@ -30,7 +31,11 @@ class MountainInfoViewModel @Inject constructor(
     val mountainList: StateFlow<ArrayList<MountainInfoData>> get() = _mountainList
 
     private val _searchKeyword = MutableStateFlow<String?>(null)
-    private val _searchRegion = MutableStateFlow<Pair<String, String>?>(null)
+    private val _searchRegion = MutableStateFlow<String?>(null)
+    private val _searchRegionDetail = MutableStateFlow<String?>(null)
+    private val _areaTypeSearch = MutableStateFlow<Boolean>(false)
+    val searchRegion: StateFlow<String?> get() = _searchRegion
+    val searchRegionDetail: StateFlow<String?> get() = _searchRegionDetail
 
     fun initAllMountainData() {
         viewModelScope.launch(ioDispatcher) {
@@ -45,20 +50,32 @@ class MountainInfoViewModel @Inject constructor(
 
     fun getMountainsInfoByOrder() {
         viewModelScope.launch(ioDispatcher) {
-            combine(_searchKeyword, _searchRegion) { keyword, region ->
+            combine(
+                _searchKeyword,
+                _areaTypeSearch,
+                _searchRegion,
+                _searchRegionDetail
+            ) { keyword, areaSearch, region, regionDetail ->
                 if (!keyword.isNullOrBlank()) {
                     flow {
                         emit(search(keyword, _allMountainList.value))
                     }
-                } else if (region != null) {
-                    getAllMountainInfoUseCase.invoke(Unit)
+                } else if (areaSearch && region != null && regionDetail != null) {
+                    getMountainsInfoByKeywordUseCase.invoke(
+                        SearchRequestParams(
+                            region = region,
+                            regionDetail = regionDetail
+                        )
+                    )
                 } else {
                     emptyFlow()
                 }
-            }.flatMapLatest {
+            }.filterNotNull().flatMapLatest {
                 it.map {
                     if (it != null) {
                         _mountainList.value = it
+                        _areaTypeSearch.value = false
+                        _searchKeyword.value = null
                         switchMainViewType(MainViewType.SearchResultType)
                     }
                 }
@@ -109,8 +126,22 @@ class MountainInfoViewModel @Inject constructor(
         _searchKeyword.value = keyword
     }
 
-    fun updateSearchRegion(region: String, regionDetail: String) {
-        _searchRegion.value = region to regionDetail
+    fun updateSearchRegion(region: String) {
+        _searchRegion.update {
+            region
+        }
+    }
+
+    fun updateSearchRegionDetail(regionDetail: String) {
+        _searchRegionDetail.update {
+            regionDetail
+        }
+    }
+
+    fun updateAreaTypeSearchFlag(isTrue: Boolean) {
+        _areaTypeSearch.update {
+            isTrue
+        }
     }
 
 }

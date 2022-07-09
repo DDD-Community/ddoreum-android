@@ -3,7 +3,7 @@ package com.project.ddoreum.mountaininfo
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.project.ddoreum.R
 import com.project.ddoreum.common.hideKeyboard
 import com.project.ddoreum.common.repeatCallDefaultOnCreated
@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MountainInfoFragment :
     BaseFragment<FragmentMountainInfoBinding>(R.layout.fragment_mountain_info) {
 
-    override val viewModel: MountainInfoViewModel by viewModels()
+    override val viewModel: MountainInfoViewModel by activityViewModels()
 
     override fun initLayout() {
         bind {

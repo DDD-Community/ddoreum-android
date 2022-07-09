@@ -13,7 +13,6 @@ class GetMountainsInfoByKeywordUseCase @Inject constructor(
 
     override suspend fun execute(param: SearchRequestParams): Flow<ArrayList<MountainInfoData>?> {
         return mountainRepository.getMountainsInfoByKeyword(
-            name = param.name,
             region = param.region,
             regionDetail = param.regionDetail
         )

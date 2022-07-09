@@ -1,4 +1,4 @@
-package com.project.ddoreum.mountaininfo.search
+package com.project.ddoreum.mountaininfo.search.favorite
 
 import androidx.lifecycle.viewModelScope
 import com.project.ddoreum.core.BaseViewModel

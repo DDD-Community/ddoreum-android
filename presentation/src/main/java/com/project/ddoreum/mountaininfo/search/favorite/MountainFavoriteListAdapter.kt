@@ -1,4 +1,4 @@
-package com.project.ddoreum.mountaininfo.search
+package com.project.ddoreum.mountaininfo.search.favorite
 
 import android.annotation.SuppressLint
 import android.view.ViewGroup
@@ -12,7 +12,9 @@ import com.project.ddoreum.domain.entity.mountain.MountainDetailInfoData
 
 class MountainFavoriteListAdapter(
     private val onClick: (MountainDetailInfoData) -> Unit
-) : ListAdapter<MountainDetailInfoData, MountainFavoriteListAdapter.MountainInfoViewHolder>(MountainInfoDiffUtil) {
+) : ListAdapter<MountainDetailInfoData, MountainFavoriteListAdapter.MountainInfoViewHolder>(
+    MountainInfoDiffUtil
+) {
 
     companion object {
         object MountainInfoDiffUtil : DiffUtil.ItemCallback<MountainDetailInfoData>() {

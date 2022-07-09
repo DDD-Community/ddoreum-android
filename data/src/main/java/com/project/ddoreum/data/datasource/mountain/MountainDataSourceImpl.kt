@@ -20,11 +20,10 @@ class MountainDataSourceImpl @Inject constructor(
     }
 
     override suspend fun getMountainsInfoByKeyword(
-        name: String?,
         region: String?,
         regionDetail: String?
     ): ApiResult<ArrayList<ResMountainInfo>?> = getResult {
-        service.getMountainsInfoByKeyword(name, region, regionDetail)
+        service.getMountainsInfoByKeyword(region, regionDetail)
     }
 
 }

@@ -1,17 +1,18 @@
-package com.project.ddoreum.mountaininfo.search
+package com.project.ddoreum.mountaininfo.search.recentsearch
 
 import androidx.fragment.app.viewModels
 import com.project.ddoreum.R
 import com.project.ddoreum.core.BaseFragment
-import com.project.ddoreum.databinding.FragmentAreaTypeBinding
+import com.project.ddoreum.databinding.FragmentRecentSearchBinding
+import com.project.ddoreum.mountaininfo.search.MountainInfoSearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AreaTypeFragment : BaseFragment<FragmentAreaTypeBinding>(R.layout.fragment_area_type) {
+class RecentSearchFragment : BaseFragment<FragmentRecentSearchBinding>(R.layout.fragment_recent_search) {
 
     companion object {
         @JvmStatic
-        fun newInstance() = AreaTypeFragment()
+        fun newInstance() = RecentSearchFragment()
     }
 
     override val viewModel: MountainInfoSearchViewModel by viewModels({ requireParentFragment() })

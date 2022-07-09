@@ -1,5 +1,6 @@
 package com.project.ddoreum.common
 
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -24,3 +25,5 @@ fun LifecycleOwner.repeatCallDefaultOnResume(state: Lifecycle.State = Lifecycle.
         lifecycle.repeatOnLifecycle(state, block)
     }
 }
+
+fun Fragment.requireGrandParentFragment() = this.requireParentFragment().requireParentFragment()

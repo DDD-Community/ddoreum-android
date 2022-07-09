@@ -48,15 +48,7 @@ fun setDetailImage(view: ImageView, url: String?) {
                 override fun onResourceCleared(placeholder: Drawable?) {}
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     var resource = resource
-                    val width = view.width
-                    if (resource.height > 0) {
-                        val height = if (view.measuredHeight >= resource.height) {
-                            view.measuredHeight
-                        } else {
-                            width * resource.height / resource.height
-                        }
-                        resource = Bitmap.createScaledBitmap(resource, width, height, false)
-                    }
+                    resource = Bitmap.createScaledBitmap(resource, view.width, view.height, false)
                     view.setImageBitmap(resource)
                 }
             })

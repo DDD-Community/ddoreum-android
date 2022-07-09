@@ -1,6 +1,8 @@
 package com.project.ddoreum.mountaininfo.list
 
 import android.content.Intent
+import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.ddoreum.R
@@ -23,7 +25,7 @@ class MountainInfoListFragment :
 
     override val viewModel: MountainInfoListViewModel by viewModels()
 
-    private val sharedViewModel: MountainInfoViewModel by viewModels({ requireParentFragment() })
+    private val sharedViewModel: MountainInfoViewModel by activityViewModels()
 
     override fun initLayout() {
         initRcvView()
@@ -38,6 +40,7 @@ class MountainInfoListFragment :
 
     private fun observeFlow() = viewLifecycleOwner.repeatCallDefaultOnCreated {
         sharedViewModel.mountainList.collect {
+            binding.tvEmptyList.isVisible = it.isEmpty()
             mountainInfoListAdapter.submitList(it)
         }
     }

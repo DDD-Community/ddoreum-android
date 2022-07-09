@@ -17,9 +17,8 @@ interface MountainService {
         @Path("name") name: String
     ): Response<ResMountainDetailInfo>
 
-    @GET("/v1/mountains/{name}")
+    @GET("/v1/mountain")
     suspend fun getMountainsInfoByKeyword(
-        @Path("name") name: String?,
         @Query("region") region: String?,
         @Query("regionDetail") regionDetail: String?
     ): Response<ArrayList<ResMountainInfo>>

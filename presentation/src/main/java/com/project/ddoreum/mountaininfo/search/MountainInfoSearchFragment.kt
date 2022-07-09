@@ -3,10 +3,12 @@ package com.project.ddoreum.mountaininfo.search
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.project.ddoreum.R
+import com.project.ddoreum.common.hideKeyboard
 import com.project.ddoreum.core.BaseFragment
 import com.project.ddoreum.databinding.FragmentMountainInfoSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +21,7 @@ class MountainInfoSearchFragment : BaseFragment<FragmentMountainInfoSearchBindin
         fun newInstance() = MountainInfoSearchFragment()
     }
 
-    override val viewModel: MountainInfoSearchViewModel by viewModels()
+    override val viewModel: MountainInfoSearchViewModel by activityViewModels()
 
     override fun initLayout() {
         searchFilterAdapter = SearchFilterAdapter(requireActivity())
@@ -30,6 +32,14 @@ class MountainInfoSearchFragment : BaseFragment<FragmentMountainInfoSearchBindin
         binding.vpSearchFilter.apply {
             adapter = searchFilterAdapter
             currentItem = 0
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    if (position in 1..2) {
+                        hideKeyboard()
+                    }
+                }
+            })
         }
         TabLayoutMediator(binding.tbLayoutSearchFilter, binding.vpSearchFilter){ tab: TabLayout.Tab, position: Int ->
             tab.customView = setItem(position)

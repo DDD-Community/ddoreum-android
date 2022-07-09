@@ -1,4 +1,4 @@
-package com.project.ddoreum.mountaininfo.search
+package com.project.ddoreum.mountaininfo.search.favorite
 
 import android.content.Intent
 import androidx.core.view.isVisible

@@ -47,11 +47,10 @@ class MountainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMountainsInfoByKeyword(
-        name: String?,
         region: String?,
         regionDetail: String?
     ): Flow<ArrayList<MountainInfoData>?> {
-        val result = mountainDataSource.getMountainsInfoByKeyword(name, region, regionDetail)
+        val result = mountainDataSource.getMountainsInfoByKeyword(region, regionDetail)
         return when (result.status) {
             ApiResult.Status.SUCCESS -> {
                 flow {

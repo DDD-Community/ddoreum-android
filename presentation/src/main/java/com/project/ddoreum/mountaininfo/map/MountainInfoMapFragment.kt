@@ -1,7 +1,7 @@
 package com.project.ddoreum.mountaininfo.map
 
 import android.content.Intent
-import android.util.Log
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -20,7 +20,6 @@ import com.project.ddoreum.domain.entity.mountain.MountainInfoData
 import com.project.ddoreum.mountaininfo.MountainInfoViewModel
 import com.project.ddoreum.mountaininfo.detail.MountainInfoDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.async
 
 @AndroidEntryPoint
 class MountainInfoMapFragment :
@@ -40,7 +39,7 @@ class MountainInfoMapFragment :
 
     override val viewModel: MountainInfoMapViewModel by viewModels()
 
-    private val sharedViewModel: MountainInfoViewModel by viewModels({ requireParentFragment() })
+    private val sharedViewModel: MountainInfoViewModel by activityViewModels()
 
     override fun initLayout() {
         bind {
