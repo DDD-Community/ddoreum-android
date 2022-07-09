@@ -12,4 +12,8 @@ interface MountainRepository {
     fun getAllFavoriteMountain(): Flow<HashSet<String>>
     suspend fun saveFavoriteMountain(data: MountainDetailInfoData)
     suspend fun deleteFavoriteMountain(data: MountainDetailInfoData)
+
+    fun getAllRecentSearchKeyword(): Flow<HashSet<String>>
+    suspend fun saveRecentSearchKeyword(keyword: String)
+    suspend fun deleteRecentSearchKeyword(keyword: String)
 }

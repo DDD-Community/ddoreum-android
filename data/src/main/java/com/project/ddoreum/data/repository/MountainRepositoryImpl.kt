@@ -1,6 +1,5 @@
 package com.project.ddoreum.data.repository
 
-import com.project.ddoreum.data.ApiErrorCase
 import com.project.ddoreum.data.datasource.local.LocalDataSource
 import com.project.ddoreum.data.datasource.mountain.MountainDataSource
 import com.project.ddoreum.data.mapper.mapToEntity
@@ -80,6 +79,22 @@ class MountainRepositoryImpl @Inject constructor(
     override suspend fun deleteFavoriteMountain(data: MountainDetailInfoData) {
         withContext(Dispatchers.IO) {
             localDataSource.deleteFavoriteMountain(data)
+        }
+    }
+
+    override fun getAllRecentSearchKeyword(): Flow<HashSet<String>> {
+        return localDataSource.getAllRecentSearchKeyword()
+    }
+
+    override suspend fun saveRecentSearchKeyword(keyword: String) {
+        withContext(Dispatchers.IO) {
+            localDataSource.addRecentSearchKeyword(keyword)
+        }
+    }
+
+    override suspend fun deleteRecentSearchKeyword(keyword: String) {
+        withContext(Dispatchers.IO) {
+            localDataSource.deleteRecentSearchKeyword(keyword)
         }
     }
 

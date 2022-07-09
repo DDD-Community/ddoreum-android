@@ -8,6 +8,7 @@ import com.project.ddoreum.domain.entity.mountain.MountainInfoData
 import com.project.ddoreum.domain.entity.request.SearchRequestParams
 import com.project.ddoreum.domain.usecase.mountain.GetAllMountainInfoUseCase
 import com.project.ddoreum.domain.usecase.mountain.GetMountainsInfoByKeywordUseCase
+import com.project.ddoreum.domain.usecase.search.AddRecentSearchKeywordUseCase
 import com.project.ddoreum.mountaininfo.state.MainViewType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -19,6 +20,7 @@ import javax.inject.Inject
 class MountainInfoViewModel @Inject constructor(
     private val getAllMountainInfoUseCase: GetAllMountainInfoUseCase,
     private val getMountainsInfoByKeywordUseCase: GetMountainsInfoByKeywordUseCase,
+    private val addRecentSearchKeywordUseCase: AddRecentSearchKeywordUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : BaseViewModel() {
 
@@ -58,7 +60,9 @@ class MountainInfoViewModel @Inject constructor(
             ) { keyword, areaSearch, region, regionDetail ->
                 if (!keyword.isNullOrBlank()) {
                     flow {
-                        emit(search(keyword, _allMountainList.value))
+                        emit(
+                            search(keyword, _allMountainList.value)
+                        )
                     }
                 } else if (areaSearch && region != null && regionDetail != null) {
                     getMountainsInfoByKeywordUseCase.invoke(
@@ -75,7 +79,10 @@ class MountainInfoViewModel @Inject constructor(
                     if (it != null) {
                         _mountainList.value = it
                         _areaTypeSearch.value = false
-                        _searchKeyword.value = null
+                        _searchKeyword.value?.let { keyword ->
+                            addRecentSearchKeywordUseCase.invoke(keyword)
+                            _searchKeyword.value = null
+                        }
                         switchMainViewType(MainViewType.SearchResultType)
                     }
                 }

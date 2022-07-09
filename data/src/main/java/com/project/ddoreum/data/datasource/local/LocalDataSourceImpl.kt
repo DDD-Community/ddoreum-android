@@ -18,24 +18,44 @@ class LocalDataSourceImpl @Inject constructor(@ApplicationContext context: Conte
     }
 
     private val favoriteMountainFlow = MutableStateFlow(favoriteMountainList)
+    private val recentSearchKeywordFlow = MutableStateFlow(recentSearchKeywordList)
 
     override fun addFavoriteMountain(data: MountainDetailInfoData) {
         if (favoriteMountainList == null) {
             favoriteMountainList = hashSetOf()
         }
         favoriteMountainList = favoriteMountainList.apply {
-            this.add(data.mountainCode.toString())
+            add(data.mountainCode.toString())
         }
     }
 
     override fun deleteFavoriteMountain(data: MountainDetailInfoData) {
         favoriteMountainList = favoriteMountainList.apply {
-            this.remove(data.mountainCode.toString())
+            remove(data.mountainCode.toString())
         }
     }
 
     override fun getAllFavoriteMountainList(): Flow<HashSet<String>> {
         return favoriteMountainFlow
+    }
+
+    override fun addRecentSearchKeyword(keyword: String) {
+        if (recentSearchKeywordList == null) {
+            recentSearchKeywordList = hashSetOf()
+        }
+        recentSearchKeywordList = recentSearchKeywordList.apply {
+            add(keyword)
+        }
+    }
+
+    override fun deleteRecentSearchKeyword(keyword: String) {
+        recentSearchKeywordList = recentSearchKeywordList.apply {
+            remove(keyword)
+        }
+    }
+
+    override fun getAllRecentSearchKeyword(): Flow<HashSet<String>> {
+        return recentSearchKeywordFlow
     }
 
     override var favoriteMountainList: HashSet<String>
@@ -53,7 +73,23 @@ class LocalDataSourceImpl @Inject constructor(@ApplicationContext context: Conte
             sharedPrefs.edit().putString(FAVORITE_LIST, jsonString).apply()
         }
 
+    override var recentSearchKeywordList: HashSet<String>
+        get() {
+            val jsonString = sharedPrefs.getString(RECENT_SEARCH_KEYWORD_LIST, "") ?: ""
+            return try {
+                Gson().fromJson(jsonString) as HashSet<String>
+            } catch (e: Exception) {
+                HashSet()
+            }
+        }
+        set(value) {
+            recentSearchKeywordFlow.value = value
+            val jsonString = Gson().toJson(value)
+            sharedPrefs.edit().putString(RECENT_SEARCH_KEYWORD_LIST, jsonString).apply()
+        }
+
     companion object {
         const val FAVORITE_LIST = "favorite_list"
+        const val RECENT_SEARCH_KEYWORD_LIST = "recent_search_keyword_list"
     }
 }

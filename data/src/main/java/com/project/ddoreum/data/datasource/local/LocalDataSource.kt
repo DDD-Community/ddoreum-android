@@ -8,5 +8,10 @@ interface LocalDataSource {
     fun deleteFavoriteMountain(data: MountainDetailInfoData)
     fun getAllFavoriteMountainList(): Flow<HashSet<String>>
 
+    fun addRecentSearchKeyword(keyword: String)
+    fun deleteRecentSearchKeyword(keyword: String)
+    fun getAllRecentSearchKeyword(): Flow<HashSet<String>>
+
     var favoriteMountainList: HashSet<String>
+    var recentSearchKeywordList: HashSet<String>
 }

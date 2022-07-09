@@ -2,6 +2,9 @@ package com.project.ddoreum.di
 
 import com.project.ddoreum.domain.repository.MountainRepository
 import com.project.ddoreum.domain.usecase.mountain.*
+import com.project.ddoreum.domain.usecase.search.AddRecentSearchKeywordUseCase
+import com.project.ddoreum.domain.usecase.search.DeleteRecentSearchKeywordUseCase
+import com.project.ddoreum.domain.usecase.search.GetAllRecentSearchKeywordUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,4 +38,16 @@ object UseCaseModule {
     @Provides
     @ViewModelScoped
     fun provideGetMountainsInfoByKeywordUseCase(mountainRepository: MountainRepository) = GetMountainsInfoByKeywordUseCase(mountainRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideAddRecentSearchKeywordUseCase(mountainRepository: MountainRepository) = AddRecentSearchKeywordUseCase(mountainRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideDeleteRecentSearchKeywordUseCase(mountainRepository: MountainRepository) = DeleteRecentSearchKeywordUseCase(mountainRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetAllRecentSearchKeywordUseCase(mountainRepository: MountainRepository) = GetAllRecentSearchKeywordUseCase(mountainRepository)
 }
