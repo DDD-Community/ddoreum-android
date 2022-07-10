@@ -20,10 +20,12 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideMountainRepository(
-        mountainDataSource: MountainDataSource
+        mountainDataSource: MountainDataSource,
+        localDataSource: LocalDataSource
     ): MountainRepository {
         return MountainRepositoryImpl(
-            mountainDataSource = mountainDataSource
+            mountainDataSource = mountainDataSource,
+            localDataSource = localDataSource
         )
     }
 

@@ -56,4 +56,7 @@ dependencies {
 
     //unit test
     testImplementation 'junit:junit:4.13.2'
+
+    // Alternatively - use the following artifact without an Android dependency.
+    implementation "androidx.preference:preference-ktx:1.1.1"
 }
