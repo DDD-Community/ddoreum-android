@@ -3,6 +3,8 @@ package com.project.ddoreum.data.model
 import com.google.gson.annotations.SerializedName
 
 data class ResMountainDetailInfo(
+    @SerializedName("name")
+    val name: String,
     @SerializedName("code")
     val code: Int,
     @SerializedName("detail")

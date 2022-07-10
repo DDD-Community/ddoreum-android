@@ -19,14 +19,26 @@
         <entry key="presentation/src/main/res/drawable/ic_record_unselected.xml" value="0.156" />
         <entry key="presentation/src/main/res/drawable/selector_splash_title.xml" value="0.545" />
         <entry key="presentation/src/main/res/layout/activity_main.xml" value="0.3287750244140625" />
+        <entry key="presentation/src/main/res/layout/activity_mountain_info_detail.xml" value="0.17889492753623187" />
         <entry key="presentation/src/main/res/layout/activity_splash.xml" value="0.25574572127139367" />
         <entry key="presentation/src/main/res/layout/dialog_splash_permission.xml" value="0.2610547782503683" />
+        <entry key="presentation/src/main/res/layout/fragment_area_type.xml" value="0.22" />
         <entry key="presentation/src/main/res/layout/fragment_challenge.xml" value="0.29270833333333335" />
+        <entry key="presentation/src/main/res/layout/fragment_favorite_list.xml" value="0.17889492753623187" />
         <entry key="presentation/src/main/res/layout/fragment_home.xml" value="0.3078125" />
         <entry key="presentation/src/main/res/layout/fragment_mountain_info.xml" value="0.335" />
+        <entry key="presentation/src/main/res/layout/fragment_mountain_info_list.xml" value="0.22826086956521738" />
+        <entry key="presentation/src/main/res/layout/fragment_mountain_info_map.xml" value="0.18768996960486323" />
+        <entry key="presentation/src/main/res/layout/fragment_mountain_info_search.xml" value="0.2128623188405797" />
         <entry key="presentation/src/main/res/layout/fragment_my_page.xml" value="0.29270833333333335" />
+        <entry key="presentation/src/main/res/layout/fragment_recent_search.xml" value="0.5" />
         <entry key="presentation/src/main/res/layout/fragment_record.xml" value="0.3078125" />
         <entry key="presentation/src/main/res/layout/item_splash_permission.xml" value="0.625" />
+        <entry key="presentation/src/main/res/layout/layout_area_type_region.xml" value="0.3859375" />
+        <entry key="presentation/src/main/res/layout/layout_area_type_region_detail.xml" value="0.3859375" />
+        <entry key="presentation/src/main/res/layout/layout_favorite_mountain_info_item.xml" value="0.3078125" />
+        <entry key="presentation/src/main/res/layout/layout_mountain_info_item.xml" value="0.3078125" />
+        <entry key="presentation/src/main/res/layout/layout_recent_search_item.xml" value="0.3859375" />
         <entry key="presentation/src/main/res/menu/menu_bottom_navigation.xml" value="0.3078125" />
         <entry key="presentation/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.407" />
         <entry key="presentation/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.407" />

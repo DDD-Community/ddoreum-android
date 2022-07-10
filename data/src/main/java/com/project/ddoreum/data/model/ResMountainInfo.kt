@@ -8,8 +8,6 @@ data class ResMountainInfo(
     @SerializedName("latitude")
     val latitude: Double,
     @SerializedName("longitude")
-    val longitude: Double,
-    @SerializedName("name")
-    val name: String
+    val longitude: Double
 )
 

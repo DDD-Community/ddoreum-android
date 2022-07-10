@@ -9,13 +9,13 @@ internal fun ResMountainInfo.mapToEntity(): MountainInfoData {
     return MountainInfoData(
         mountainInfo = this.info.mapToEntity(),
         latitude = this.latitude,
-        longitude = this.longitude,
-        name = this.name
+        longitude = this.longitude
     )
 }
 
 internal fun ResMountainDetailInfo.mapToEntity(): MountainDetailInfoData {
     return MountainDetailInfoData(
+        name = this.name,
         mountainCode = this.code,
         mountainDetail = this.detail,
         elevation = this.elevation,

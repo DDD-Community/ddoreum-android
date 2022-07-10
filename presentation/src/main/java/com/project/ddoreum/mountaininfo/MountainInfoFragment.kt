@@ -1,38 +1,137 @@
 package com.project.ddoreum.mountaininfo
 
-import androidx.fragment.app.viewModels
-import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.*
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.project.ddoreum.R
+import com.project.ddoreum.common.hideKeyboard
+import com.project.ddoreum.common.repeatCallDefaultOnCreated
 import com.project.ddoreum.core.BaseFragment
 import com.project.ddoreum.databinding.FragmentMountainInfoBinding
+import com.project.ddoreum.mountaininfo.list.MountainInfoListFragment
+import com.project.ddoreum.mountaininfo.map.MountainInfoMapFragment
+import com.project.ddoreum.mountaininfo.search.MountainInfoSearchFragment
+import com.project.ddoreum.mountaininfo.state.MainViewType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MountainInfoFragment : BaseFragment<FragmentMountainInfoBinding>(R.layout.fragment_mountain_info), OnMapReadyCallback {
+class MountainInfoFragment :
+    BaseFragment<FragmentMountainInfoBinding>(R.layout.fragment_mountain_info) {
 
-    override val viewModel: MountainInfoViewModel by viewModels()
+    override val viewModel: MountainInfoViewModel by activityViewModels()
 
     override fun initLayout() {
-        initMapFragment()
-        initGetData()
+        bind {
+            viewmodel = viewModel
+            searchView.isIconified = false
+        }
+        initFragment()
+        initSearchView()
+        observeFlow()
+        initRequestData()
     }
 
-    private fun initGetData() {
-        viewModel.getAllMountainInfo()
+    private fun initRequestData() {
+        viewModel.initAllMountainData()
+        viewModel.getMountainsInfoByOrder()
     }
 
-    private fun initMapFragment() {
-        val mapFragment = childFragmentManager.findFragmentById(R.id.mapView) as MapFragment?
-            ?: MapFragment.newInstance().also {
-                childFragmentManager.beginTransaction().add(R.id.mapView, it).commit()
+    private fun observeFlow() = viewLifecycleOwner.repeatCallDefaultOnCreated {
+        viewModel.mainViewType.collect { mainViewType ->
+            setMainViewType(mainViewType)
+        }
+    }
+
+    private fun setMainViewType(mainViewType: MainViewType) {
+        when (mainViewType) {
+            MainViewType.MapType -> {
+                changeFragment(mountainInfoViewFragmentList[0])
+                updateHeaderIcon(MainViewType.MapType)
+                clearSearchView()
             }
-        mapFragment?.getMapAsync(this)
+            MainViewType.ListType -> {
+                changeFragment(mountainInfoViewFragmentList[1])
+                updateHeaderIcon(MainViewType.ListType)
+                clearSearchView()
+            }
+            MainViewType.SearchType -> {
+                changeFragment(mountainInfoViewFragmentList[2])
+            }
+            MainViewType.SearchResultType -> {
+                changeFragment(mountainInfoViewFragmentList[1])
+                updateHeaderIcon(MainViewType.ListType)
+            }
+        }
     }
 
-    override fun onMapReady(naverMap: NaverMap) {
-        val defaultPosition = LatLng(37.52732472751029, 126.9804849269383)
-        naverMap.moveCamera(CameraUpdate.scrollAndZoomTo(defaultPosition, 12.0))
+    private fun clearSearchView() = with(binding) {
+        searchView.apply {
+            clearFocus()
+            hideKeyboard()
+        }
+    }
+
+    private fun initFragment() {
+        childFragmentManager.beginTransaction().apply {
+            add(R.id.mountain_info_container, mountainInfoViewFragmentList[0])
+            add(R.id.mountain_info_container, mountainInfoViewFragmentList[1])
+            add(R.id.mountain_info_container, mountainInfoViewFragmentList[2])
+        }.commitNow()
+
+        changeFragment(mountainInfoViewFragmentList[1])
+    }
+
+    private fun initSearchView() = with(binding.searchView) {
+        isFocusable = false
+        isIconified = false
+        clearFocus()
+        setOnQueryTextFocusChangeListener { _, isFocused ->
+            if (isFocused) {
+                viewModel.switchMainViewTypeToSearch()
+            } else {
+                if (query.isEmpty()) {
+                    viewModel.initAllMountainData()
+                }
+            }
+        }
+        findViewById<AppCompatImageView>(androidx.appcompat.R.id.search_close_btn).setOnClickListener {
+            viewModel.initAllMountainData()
+            apply {
+                setQuery("", false)
+            }
+        }
+    }
+
+    private fun changeFragment(recentFragment: Fragment){
+        childFragmentManager.beginTransaction().apply {
+            mountainInfoViewFragmentList
+                .filter { baseFragment ->
+                    baseFragment != recentFragment
+                }.map { fragment ->
+                    hide(fragment)
+                }
+            show(recentFragment)
+        }.commitNow()
+    }
+
+    private fun updateHeaderIcon(type: MainViewType) = with(binding) {
+        when (type) {
+            MainViewType.MapType -> {
+                ivSwitchMapList.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_list))
+            }
+            MainViewType.ListType -> {
+                ivSwitchMapList.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_map))
+            }
+        }
+    }
+
+    private val mountainInfoViewFragmentList by lazy {
+        listOf(
+            MountainInfoMapFragment.newInstance(),
+            MountainInfoListFragment.newInstance(),
+            MountainInfoSearchFragment.newInstance()
+        )
     }
 
     companion object {
