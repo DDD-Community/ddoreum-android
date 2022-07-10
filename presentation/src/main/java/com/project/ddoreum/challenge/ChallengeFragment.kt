@@ -25,6 +25,7 @@ class ChallengeFragment : BaseFragment<FragmentChallengeBinding>(R.layout.fragme
         initRcvAdapter()
         collectPeriodListFlow()
         collectLocationListFlow()
+        collectOnGoingChallengeListFlow()
     }
 
     private fun initRequestData() {
@@ -34,6 +35,7 @@ class ChallengeFragment : BaseFragment<FragmentChallengeBinding>(R.layout.fragme
     private fun initRcvAdapter() {
         binding.rcvPeriodChallenge.adapter = periodChallengeListAdapter
         binding.rcvLocationChallenge.adapter = locationChallengeListAdapter
+        binding.rcvOnGoingChallenge.adapter = onGoingChallengeListAdapter
     }
 
     private fun collectPeriodListFlow() = lifecycleScope.launchWhenCreated {
@@ -45,6 +47,12 @@ class ChallengeFragment : BaseFragment<FragmentChallengeBinding>(R.layout.fragme
     private fun collectLocationListFlow() = lifecycleScope.launchWhenCreated {
         viewModel.locationChallengeList.collect {
             locationChallengeListAdapter.submitList(it)
+        }
+    }
+
+    private fun collectOnGoingChallengeListFlow() = lifecycleScope.launchWhenCreated {
+        viewModel.locationChallengeList.collect {
+            onGoingChallengeListAdapter.submitList(it)
         }
     }
 
@@ -63,6 +71,12 @@ class ChallengeFragment : BaseFragment<FragmentChallengeBinding>(R.layout.fragme
                 putExtra("challenge_id", it.id)
             }
             startActivity(intent)
+        }
+    }
+
+    private val onGoingChallengeListAdapter by lazy {
+        OnGoingChallengeListAdapter {
+
         }
     }
 }

@@ -107,12 +107,13 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/vp_on_going_challenge"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcv_on_going_challenge"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:paddingStart="16dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/header_on_going_challenge" />
@@ -181,6 +182,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
+                    android:paddingBottom="50dp"
                     app:layout_constraintTop_toBottomOf="@+id/layout_period_challenge">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
