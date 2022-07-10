@@ -42,6 +42,7 @@ fun setDetailImage(view: ImageView, url: String?) {
         GlideApp.with(view)
             .asBitmap()
             .load(url)
+            .thumbnail(0.7f)
             .override(view.width, view.height)
             .into(object : CustomViewTarget<ImageView, Bitmap>(view) {
                 override fun onLoadFailed(errorDrawable: Drawable?) {}
