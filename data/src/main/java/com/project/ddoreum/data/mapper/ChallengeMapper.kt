@@ -9,6 +9,7 @@ internal fun ResChallengeInfo.mapToEntity(): ChallengeInfoData {
     return ChallengeInfoData(
         description = description,
         name = name,
+        id = id,
         type = type,
         displayImage = displayImage,
         count = count,

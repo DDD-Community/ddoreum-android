@@ -7,6 +7,8 @@ data class ResChallengeInfo(
     val description: String,
     @SerializedName("name")
     val name: String,
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("type")
     val type: String,
     @SerializedName("displayImage")

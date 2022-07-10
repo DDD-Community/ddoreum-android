@@ -19,8 +19,10 @@
 
     <color name="gray_01">#F2F2F2</color>
     <color name="gray_02">#E7E7E7</color>
+    <color name="gray_03">#FAFAFA</color>
     <color name="gray_04">#8E8E8E</color>
     <color name="gray_06">#616161</color>
+    <color name="gray_07">#444444</color>
 
     <color name="transparent">#00000000</color>
 </resources>
