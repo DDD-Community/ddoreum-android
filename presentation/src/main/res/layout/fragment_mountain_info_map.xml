@@ -45,7 +45,8 @@
                 android:paddingStart="20dp"
                 android:paddingTop="24dp"
                 android:paddingEnd="20dp"
-                android:paddingBottom="22dp">
+                android:paddingBottom="22dp"
+                android:foreground="?android:attr/selectableItemBackground">
 
                 <TextView
                     android:id="@+id/tv_card_mountain_name"
