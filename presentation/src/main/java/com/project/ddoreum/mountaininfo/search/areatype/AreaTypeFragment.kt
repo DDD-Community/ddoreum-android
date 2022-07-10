@@ -22,7 +22,10 @@ class AreaTypeFragment : BaseFragment<FragmentAreaTypeBinding>(R.layout.fragment
     override val viewModel: MountainInfoViewModel by activityViewModels()
 
     override fun initLayout() {
-        Log.d("ViewModel 2 HashCode :: ", "${viewModel.hashCode()}")
+        bind {
+            rcvRegion.adapter = areaTypeRegionListAdapter
+            rcvRegionDetail.adapter = areaTypeRegionDetailListAdapter
+        }
         initView()
         initRcvView()
         collectFlow()
@@ -36,13 +39,8 @@ class AreaTypeFragment : BaseFragment<FragmentAreaTypeBinding>(R.layout.fragment
     }
 
     private fun initRcvView() = with(binding) {
-        rcvRegion.adapter = areaTypeRegionListAdapter
-        rcvRegion.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         areaTypeRegionListAdapter.submitList(AreaTypeListAdapter.areaList)
         viewModel.updateSearchRegion("서울특별시")
-
-        rcvRegionDetail.adapter = areaTypeRegionDetailListAdapter
-        rcvRegionDetail.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         val initialList = AreaTypeRegionDetailListAdapter.areaList["서울특별시"]?.split(",")
         areaTypeRegionDetailListAdapter.submitList(initialList)
     }

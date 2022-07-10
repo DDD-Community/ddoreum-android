@@ -22,15 +22,11 @@ class FavoriteListFragment : BaseFragment<FragmentFavoriteListBinding>(R.layout.
     override val viewModel: FavoriteListViewModel by viewModels()
 
     override fun initLayout() {
+        bind {
+            rcvFavoriteList.adapter = mountainFavoriteListAdapter
+        }
         viewModel.getAllFavoriteMountainList()
-        initRcvView()
         observeFlow()
-    }
-
-    private fun initRcvView() = with(binding) {
-        rcvFavoriteList.adapter = mountainFavoriteListAdapter
-        rcvFavoriteList.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
     private fun observeFlow() = viewLifecycleOwner.repeatCallDefaultOnCreated {

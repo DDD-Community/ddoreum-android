@@ -28,14 +28,10 @@ class MountainInfoListFragment :
     private val sharedViewModel: MountainInfoViewModel by activityViewModels()
 
     override fun initLayout() {
-        initRcvView()
+        bind {
+            rcvMountainInfoList.adapter = mountainInfoListAdapter
+        }
         observeFlow()
-    }
-
-    private fun initRcvView() = with(binding) {
-        rcvMountainInfoList.adapter = mountainInfoListAdapter
-        rcvMountainInfoList.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
     private fun observeFlow() = viewLifecycleOwner.repeatCallDefaultOnCreated {

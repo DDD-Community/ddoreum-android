@@ -23,8 +23,10 @@ class RecentSearchFragment : BaseFragment<FragmentRecentSearchBinding>(R.layout.
     private val mainInfoViewModel: MountainInfoViewModel by activityViewModels()
 
     override fun initLayout() {
+        bind {
+            rcvRecentSearch.adapter = recentSearchKeywordAdapter
+        }
         initView()
-        initRcv()
         initRequest()
         collectFlow()
     }
@@ -33,14 +35,6 @@ class RecentSearchFragment : BaseFragment<FragmentRecentSearchBinding>(R.layout.
         binding.tvClearAllRecentSearchKeyword.setOnClickListener {
             viewModel.deleteAllRecentKeyword()
         }
-    }
-
-    private fun initRcv() = with(binding) {
-        rcvRecentSearch.layoutManager =  GridLayoutManager(requireContext(),2).apply {
-            orientation = GridLayoutManager.VERTICAL
-        }
-        rcvRecentSearch.adapter = recentSearchKeywordAdapter
-        rcvRecentSearch.setHasFixedSize(true)
     }
 
     private fun initRequest() {

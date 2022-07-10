@@ -10,6 +10,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_mountain_info_list"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
