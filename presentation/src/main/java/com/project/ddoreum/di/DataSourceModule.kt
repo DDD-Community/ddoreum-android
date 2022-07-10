@@ -1,6 +1,9 @@
 package com.project.ddoreum.di
 
 import android.content.Context
+import com.project.ddoreum.data.datasource.challenge.ChallengeDataSource
+import com.project.ddoreum.data.datasource.challenge.ChallengeDataSourceImpl
+import com.project.ddoreum.data.datasource.challenge.RemoteConfigHelper
 import com.project.ddoreum.data.datasource.local.LocalDataSource
 import com.project.ddoreum.data.datasource.local.LocalDataSourceImpl
 import com.project.ddoreum.data.datasource.mountain.MountainDataSource
@@ -27,5 +30,11 @@ object DataSourceModule {
     @Singleton
     fun provideLocalDataSource(@ApplicationContext appContext: Context): LocalDataSource {
         return LocalDataSourceImpl(appContext)
+    }
+
+    @Provides
+    @Singleton
+    fun provideChallengeDataSource(remoteConfigHelper: RemoteConfigHelper): ChallengeDataSource {
+        return ChallengeDataSourceImpl(remoteConfigHelper)
     }
 }

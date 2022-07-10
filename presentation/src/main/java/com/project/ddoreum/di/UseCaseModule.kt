@@ -1,6 +1,8 @@
 package com.project.ddoreum.di
 
+import com.project.ddoreum.domain.repository.ChallengeRepository
 import com.project.ddoreum.domain.repository.MountainRepository
+import com.project.ddoreum.domain.usecase.challenge.GetAllChallengeListUseCase
 import com.project.ddoreum.domain.usecase.mountain.GetAllMountainInfoUseCase
 import dagger.Module
 import dagger.Provides
@@ -15,5 +17,9 @@ object UseCaseModule {
     @Provides
     @ViewModelScoped
     fun provideGetAllMountainInfoUseCase(mountainRepository: MountainRepository) = GetAllMountainInfoUseCase(mountainRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetAllChallengeListUseCase(challengeRepository: ChallengeRepository) = GetAllChallengeListUseCase(challengeRepository)
 
 }
