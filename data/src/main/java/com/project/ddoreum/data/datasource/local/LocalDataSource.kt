@@ -12,6 +12,11 @@ interface LocalDataSource {
     fun deleteRecentSearchKeyword(keyword: String)
     fun getAllRecentSearchKeyword(): Flow<HashSet<String>>
 
+    fun getUserInfo(): Flow<Triple<String, String, String?>>
+    fun setUserInfo(userInfo: Triple<String, String, String?>)
+
     var recentSearchKeywordList: HashSet<String>
     var favoriteMountainList: HashSet<String>
+
+    var userInfoData: Triple<String, String, String?> // name, email, image
 }

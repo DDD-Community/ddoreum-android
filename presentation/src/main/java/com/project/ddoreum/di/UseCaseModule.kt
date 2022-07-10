@@ -3,6 +3,8 @@ package com.project.ddoreum.di
 import com.project.ddoreum.domain.repository.ChallengeRepository
 import com.project.ddoreum.domain.repository.MountainRepository
 import com.project.ddoreum.domain.usecase.challenge.GetAllChallengeListUseCase
+import com.project.ddoreum.domain.usecase.intro.GetUserInfoUseCase
+import com.project.ddoreum.domain.usecase.intro.SetUserInfoUseCase
 import com.project.ddoreum.domain.usecase.mountain.GetAllMountainInfoUseCase
 import com.project.ddoreum.domain.usecase.mountain.*
 import com.project.ddoreum.domain.usecase.search.AddRecentSearchKeywordUseCase
@@ -57,4 +59,12 @@ object UseCaseModule {
     @Provides
     @ViewModelScoped
     fun provideGetAllRecentSearchKeywordUseCase(mountainRepository: MountainRepository) = GetAllRecentSearchKeywordUseCase(mountainRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetUserInfoUseCase(mountainRepository: MountainRepository) = GetUserInfoUseCase(mountainRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideSetUserInfoUseCase(mountainRepository: MountainRepository) = SetUserInfoUseCase(mountainRepository)
 }

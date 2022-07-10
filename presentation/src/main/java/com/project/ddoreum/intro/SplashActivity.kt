@@ -81,6 +81,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
                         SplashState.RejectPermission -> {
                             finishAffinity()
                         }
+                        SplashState.SuccessPermission -> {
+                            viewModel.getUserInfoLoggedIn()
+                        }
                         SplashState.FailLogin -> {
                             Toast.makeText(
                                 this@SplashActivity,
