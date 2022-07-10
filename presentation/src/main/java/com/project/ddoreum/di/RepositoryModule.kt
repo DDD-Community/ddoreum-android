@@ -1,8 +1,11 @@
 package com.project.ddoreum.di
 
+import com.project.ddoreum.data.datasource.challenge.ChallengeDataSource
 import com.project.ddoreum.data.datasource.local.LocalDataSource
 import com.project.ddoreum.data.datasource.mountain.MountainDataSource
+import com.project.ddoreum.data.repository.ChallengeRepositoryImpl
 import com.project.ddoreum.data.repository.MountainRepositoryImpl
+import com.project.ddoreum.domain.repository.ChallengeRepository
 import com.project.ddoreum.domain.repository.MountainRepository
 import dagger.Module
 import dagger.Provides
@@ -24,6 +27,16 @@ object RepositoryModule {
         return MountainRepositoryImpl(
             mountainDataSource = mountainDataSource,
             localDataSource = localDataSource
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideChallengeRepository(
+        challengeDataSource: ChallengeDataSource
+    ): ChallengeRepository {
+        return ChallengeRepositoryImpl(
+            challengeDataSource = challengeDataSource
         )
     }
 

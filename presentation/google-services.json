@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "470805134004",
+    "project_id": "ddoreum",
+    "storage_bucket": "ddoreum.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470805134004:android:9421af78d9d58eb548f5e1",
+        "android_client_info": {
+          "package_name": "com.project.ddoreum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470805134004-nf1k4tulebd0cpaa04jtjvasi6667k86.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyGhe6HiyGtjNN3bJIvrMLYHQ1yOqyqTg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470805134004-nf1k4tulebd0cpaa04jtjvasi6667k86.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

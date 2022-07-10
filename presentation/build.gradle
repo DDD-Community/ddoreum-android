@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -66,6 +67,7 @@ dependencies {
 
     //databinding
     implementation "androidx.databinding:databinding-ktx:7.1.2"
+    implementation 'com.google.firebase:firebase-config-ktx:21.0.1'
 
     //lifecycle
     def lifecycle_version = "2.5.0"
