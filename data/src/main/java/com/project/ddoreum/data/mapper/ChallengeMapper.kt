@@ -10,9 +10,13 @@ internal fun ResChallengeInfo.mapToEntity(): ChallengeInfoData {
         description = description,
         name = name,
         type = type,
-        verifyList = verifyList.map {
+        displayImage = displayImage,
+        count = count,
+        verifyList = verifyList?.map {
             it.mapToEntity()
-        }
+        },
+        verifyPeriod = verifyPeriod,
+        verifyCount = verifyCount
     )
 }
 

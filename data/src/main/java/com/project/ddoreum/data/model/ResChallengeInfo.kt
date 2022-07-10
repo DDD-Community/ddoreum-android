@@ -9,6 +9,14 @@ data class ResChallengeInfo(
     val name: String,
     @SerializedName("type")
     val type: String,
+    @SerializedName("displayImage")
+    val displayImage: String,
+    @SerializedName("count")
+    val count: Int,
     @SerializedName("verifyList")
-    val verifyList: List<ResChallengeMountainInfo>
+    val verifyList: List<ResChallengeMountainInfo>?,
+    @SerializedName("verifyCount")
+    val verifyCount: Int?,
+    @SerializedName("verifyPeriod")
+    val verifyPeriod: String?
 )

@@ -13,4 +13,8 @@
     <string name="permission_noti_popup_description">앱 설정으로 가서 액세스 권한을 수정 할 수 있어요.\n이동하시겠어요?</string>
     <string name="permission_noti_popup_setting">설정으로 이동</string>
 
+    <!-- Challenge -->
+    <string name="challenge_sub_title_on_going">진행 중 챌린지</string>
+    <string name="challenge_sub_title_period">기간 별 챌린지</string>
+    <string name="challenge_sub_title_location">위치 별 챌린지</string>
 </resources>
