@@ -16,4 +16,7 @@ interface MountainRepository {
     fun getAllRecentSearchKeyword(): Flow<HashSet<String>>
     suspend fun saveRecentSearchKeyword(keyword: String)
     suspend fun deleteRecentSearchKeyword(keyword: String)
+
+    fun getSavedUserInfo() : Flow<Triple<String, String, String?>>
+    suspend fun saveUserInfo(userInfo : Triple<String, String, String?>)
 }

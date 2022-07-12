@@ -7,17 +7,17 @@ import com.project.ddoreum.domain.ApiResult
 import com.project.ddoreum.domain.entity.mountain.MountainDetailInfoData
 import com.project.ddoreum.domain.entity.mountain.MountainInfoData
 import com.project.ddoreum.domain.repository.MountainRepository
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 class MountainRepositoryImpl @Inject constructor(
     private val mountainDataSource: MountainDataSource,
     private val localDataSource: LocalDataSource
-): MountainRepository {
+) : MountainRepository {
 
     override suspend fun getAllMountainInfo(): Flow<ArrayList<MountainInfoData>?> {
         val result = mountainDataSource.getAllMountainInfo()
@@ -98,4 +98,13 @@ class MountainRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getSavedUserInfo(): Flow<Triple<String, String, String?>> {
+        return localDataSource.getUserInfo()
+    }
+
+    override suspend fun saveUserInfo(userInfo: Triple<String, String, String?>) {
+        withContext(Dispatchers.IO) {
+            localDataSource.setUserInfo(userInfo)
+        }
+    }
 }
