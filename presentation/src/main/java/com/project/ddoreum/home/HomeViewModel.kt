@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.project.ddoreum.core.BaseViewModel
 import com.project.ddoreum.di.IoDispatcher
-import com.project.ddoreum.di.MainDispatcher
 import com.project.ddoreum.domain.entity.challenge.ChallengeInfoData
 import com.project.ddoreum.domain.usecase.challenge.GetAllChallengeListUseCase
 import com.project.ddoreum.model.MountainRecommend
@@ -12,21 +11,23 @@ import com.project.ddoreum.model.UserInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getAllChallengeListUseCase: GetAllChallengeListUseCase,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : BaseViewModel() {
 
     private val _name = MutableLiveData<String>()
     val name: LiveData<String>
         get() = _name
 
-    private val _state = MutableStateFlow<HomeState>(HomeState.Init)
-    val state: StateFlow<HomeState>
+    private val _state = MutableSharedFlow<HomeState>()
+    val state: SharedFlow<HomeState>
         get() = _state
 
     private val _userInfo = MutableLiveData<UserInfo>()

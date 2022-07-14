@@ -34,4 +34,16 @@
     <string name="home_recommend_mountain_title">이런 산 어때요?</string>
     <string name="home_recommend_challenge">새로운 챌린지에 도전해봐요!</string>
 
+    <!-- MyPage -->
+    <string name="mypage_my_orruem">나의 오름</string>
+    <string name="mypage_climbing_history">산행 히스토리</string>
+    <string name="mypage_favorite">즐겨찾는 산</string>
+    <string name="mypage_completed_challenge">완료 챌린지</string>
+    <string name="mypage_setting">설정</string>
+    <string name="mypage_login_config">로그인 / 계정 정보 관리</string>
+    <string name="mypage_app_version">앱 버전</string>
+    <string name="mypage_app_version_format">%sv</string>
+    <string name="mypage_opensource">오픈소스 라이선스</string>
+    <string name="mypage_donate">커피로 사시미 응원하기</string>
+
 </resources>

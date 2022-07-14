@@ -14,6 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="46dp"
+        android:foreground="?android:attr/selectableItemBackground"
         android:paddingHorizontal="16dp">
 
         <androidx.appcompat.widget.AppCompatTextView
