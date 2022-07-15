@@ -1,6 +1,7 @@
 package com.project.ddoreum.challenge
 
 import android.content.Intent
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.project.ddoreum.R
@@ -51,8 +52,12 @@ class ChallengeFragment : BaseFragment<FragmentChallengeBinding>(R.layout.fragme
     }
 
     private fun collectOnGoingChallengeListFlow() = lifecycleScope.launchWhenCreated {
-        viewModel.locationChallengeList.collect {
-            onGoingChallengeListAdapter.submitList(it)
+        viewModel.inProgressChallengeData.collect {
+            if (it.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), "진행중인 챌린지가 없습니당", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "진행중인 챌린지가 ${it.size}개 있습니당", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

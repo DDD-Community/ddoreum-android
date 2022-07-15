@@ -7,6 +7,7 @@
         <variable
             name="viewmodel"
             type="com.project.ddoreum.challenge.detail.ChallengeDetailViewModel" />
+        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,6 +51,8 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             android:text="도전하기"
+            android:visibility="@{viewmodel.inProgressState ? View.GONE : View.VISIBLE}"
+            android:onClick="@{()->viewmodel.addChallenge()}"
             android:textColor="@color/white"
             app:cornerRadius="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
