@@ -1,6 +1,7 @@
 package com.project.ddoreum.challenge.detail
 
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.project.ddoreum.R
 import com.project.ddoreum.core.BaseActivity
@@ -37,6 +38,7 @@ class ChallengeDetailActivity :
     private fun initCollectFlow() = lifecycleScope.launchWhenCreated {
         viewModel.challengeDetailData.collect {
             it?.let {
+                binding.headerChallengeVerifyMountain.isVisible = !it.verifyList.isNullOrEmpty()
                 verifyMountainListAdapter.submitList(it.verifyList)
             }
         }

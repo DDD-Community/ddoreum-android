@@ -33,10 +33,12 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideChallengeRepository(
-        challengeDataSource: ChallengeDataSource
+        challengeDataSource: ChallengeDataSource,
+        localDataSource: LocalDataSource
     ): ChallengeRepository {
         return ChallengeRepositoryImpl(
-            challengeDataSource = challengeDataSource
+            challengeDataSource = challengeDataSource,
+            localDataSource = localDataSource
         )
     }
 

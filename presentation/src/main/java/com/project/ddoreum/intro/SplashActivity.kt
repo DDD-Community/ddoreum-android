@@ -90,6 +90,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
                                 getString(R.string.login_failed),
                                 Toast.LENGTH_SHORT
                             ).show()
+                            startMainActivity()
                         }
                         is SplashState.Finish -> {
                             Toast.makeText(

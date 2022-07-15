@@ -14,6 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ChallengeViewModel @Inject constructor(
     private val getAllChallengeListUseCase: GetAllChallengeListUseCase,
+
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): BaseViewModel() {
 
