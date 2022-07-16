@@ -10,9 +10,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 
-class LocalDataSourceImpl @Inject constructor(@ApplicationContext context: Context) :
-    LocalDataSource {
+class LocalDataSourceImpl @Inject constructor(@ApplicationContext context: Context) : LocalDataSource {
 
     private val sharedPrefs: SharedPreferences by lazy {
         context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
@@ -72,11 +73,11 @@ class LocalDataSourceImpl @Inject constructor(@ApplicationContext context: Conte
         userInfoData = userInfo
     }
 
-    override fun getInProgressChallengeData(): Flow<HashMap<Int, Pair<String, Int>>> {
+    override fun getInProgressChallengeData(): Flow<HashMap<Int, Triple<String, Int, String>>> {
         return inProgressChallengeFlow
     }
 
-    override fun setInProgressChallengeData(key: Int, data: Pair<String, Int>) {
+    override fun setInProgressChallengeData(key: Int, data: Triple<String, Int, String>) {
         if (inProgressChallengeData == null) {
             inProgressChallengeData = hashMapOf()
         }
@@ -135,14 +136,14 @@ class LocalDataSourceImpl @Inject constructor(@ApplicationContext context: Conte
                 .putString(LOGGED_IN_USER_INFO, jsonString)
                 .apply()
         }
-    override var inProgressChallengeData: HashMap<Int, Pair<String, Int>>
+    override var inProgressChallengeData: HashMap<Int, Triple<String, Int, String>>
         get() {
             val jsonString = sharedPrefs.getString(IN_PROGRESS_CHALLENGE_DATA, "") ?: ""
             return try {
                 return Gson().fromJson(
                     jsonString,
-                    object : TypeToken<HashMap<Int, Pair<String, Int>>>() {}.type
-                ) as? HashMap<Int, Pair<String, Int>> ?: hashMapOf()
+                    object : TypeToken<HashMap<Int, Triple<String, Int, String>>>() {}.type
+                ) as? HashMap<Int, Triple<String, Int, String>> ?: hashMapOf()
             } catch (e: Exception) {
                 HashMap()
             }

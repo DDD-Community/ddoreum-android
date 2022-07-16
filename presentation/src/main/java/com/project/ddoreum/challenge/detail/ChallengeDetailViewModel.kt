@@ -1,6 +1,9 @@
 package com.project.ddoreum.challenge.detail
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.project.ddoreum.common.getYearAfterDate
 import com.project.ddoreum.core.BaseViewModel
 import com.project.ddoreum.di.IoDispatcher
 import com.project.ddoreum.domain.entity.challenge.ChallengeInfoData
@@ -12,6 +15,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -42,14 +47,20 @@ class ChallengeDetailViewModel @Inject constructor(
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     fun addChallenge() {
         viewModelScope.launch(ioDispatcher) {
             val challenge = _challengeDetailData.value
+            val now = System.currentTimeMillis()
+            val date = Date(now)
+            val sdf = SimpleDateFormat("yyyy-MM-dd")
+            val today = sdf.format(date)
             addInProgressChallengeUseCase.invoke(
                 RequestInProgressChallenge(
                     challengeId = challenge?.id ?: 0,
                     challengeType = challenge?.type ?: "",
-                    succeedCount = 0
+                    succeedCount = 0,
+                    startDate = today
                 )
             )
         }

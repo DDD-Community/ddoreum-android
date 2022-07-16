@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.collections.HashMap
 
 class ChallengeRepositoryImpl @Inject constructor(
     private val challengeDataSource: ChallengeDataSource,
@@ -26,11 +27,11 @@ class ChallengeRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getInProgressChallengeData(): Flow<HashMap<Int, Pair<String, Int>>> {
+    override fun getInProgressChallengeData(): Flow<HashMap<Int, Triple<String, Int, String>>> {
         return localDataSource.getInProgressChallengeData()
     }
 
-    override suspend fun setInProgressChallengeData(key: Int, data: Pair<String, Int>) {
+    override suspend fun setInProgressChallengeData(key: Int, data: Triple<String, Int, String>) {
         withContext(Dispatchers.IO) {
             localDataSource.setInProgressChallengeData(key, data)
         }

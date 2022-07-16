@@ -11,7 +11,7 @@ class AddInProgressChallengeUseCase @Inject constructor(
     override suspend fun execute(param: RequestInProgressChallenge) {
         repository.setInProgressChallengeData(
             param.challengeId,
-            param.challengeType to param.succeedCount
+            Triple(param.challengeType, param.succeedCount, param.startDate)
         )
     }
 }

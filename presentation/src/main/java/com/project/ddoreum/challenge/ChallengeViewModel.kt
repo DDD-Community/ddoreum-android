@@ -1,6 +1,7 @@
 package com.project.ddoreum.challenge
 
 import androidx.lifecycle.viewModelScope
+import com.project.ddoreum.common.getYearAfterDate
 import com.project.ddoreum.core.BaseViewModel
 import com.project.ddoreum.di.IoDispatcher
 import com.project.ddoreum.domain.entity.challenge.ChallengeInfoData
@@ -39,7 +40,7 @@ class ChallengeViewModel @Inject constructor(
                 val inProgressList = mutableListOf<InProgressChallengeData>()
                 allChallenge.forEach {
                     if (inProgress.containsKey(it.id)) {
-                        createInProgressList(inProgressList, it, inProgress[it.id]?.second ?: 0)
+                        createInProgressList(inProgressList, it, inProgress[it.id]?.second ?: 0, inProgress[it.id]?.third ?: "")
                     }
                     when(it.type) {
                         PERIOD -> periodList.add(it)
@@ -53,7 +54,7 @@ class ChallengeViewModel @Inject constructor(
         }
     }
 
-    private fun createInProgressList(mutableList: MutableList<InProgressChallengeData>, data: ChallengeInfoData, succeedCount: Int) {
+    private fun createInProgressList(mutableList: MutableList<InProgressChallengeData>, data: ChallengeInfoData, succeedCount: Int, startDate: String) {
         mutableList.add(
             InProgressChallengeData(
                 name = data.name,
@@ -63,7 +64,9 @@ class ChallengeViewModel @Inject constructor(
                 verifyList = data.verifyList,
                 verifyCount = data.verifyCount,
                 verifyPeriod = data.verifyPeriod,
-                succeedCount = succeedCount
+                succeedCount = succeedCount,
+                startDate = startDate,
+                endDate = getYearAfterDate(startDate, 1)
             )
         )
     }

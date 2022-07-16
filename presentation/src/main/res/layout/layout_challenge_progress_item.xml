@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="com.project.ddoreum.domain.entity.challenge.InProgressChallengeData" />
+    </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -17,7 +24,8 @@
                 android:id="@+id/tv_challenge_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="주 1회 등산하기"
+                android:text="@{data.name}"
+                tools:text="주 1회 등산하기"
                 style="@style/Ddoreum.Font.Headline3"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +46,7 @@
                 android:id="@+id/tv_challenge_period"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2022.05.29 - 2023.05.29"
+                tools:text="2022.05.29 - 2023.05.29"
                 style="@style/Ddoreum.Font.Description"
                 app:layout_constraintTop_toBottomOf="@+id/tv_challenge_title"
                 app:layout_constraintStart_toEndOf="@+id/tv_challenge_period_title"
@@ -57,14 +65,15 @@
                 android:max="100"
                 android:progressTint="@color/orange"
                 android:layout_marginTop="44dp"
-                android:progress="45"/>
+                tools:progress="72"/>
 
             <TextView
+                android:id="@+id/tv_progress_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/progress"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="30% 달성 (18회/60회)"
+                tools:text="30% 달성 (18회/60회)"
                 style="@style/Ddoreum.Font.Description"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>

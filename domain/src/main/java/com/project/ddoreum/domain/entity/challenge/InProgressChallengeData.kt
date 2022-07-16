@@ -9,5 +9,7 @@ data class InProgressChallengeData(
     val verifyList: List<ChallengeMountainData>?,
     val verifyCount: Int?,
     val verifyPeriod: String?,
-    val succeedCount: Int = 0
+    val succeedCount: Int = 0,
+    val startDate: String,
+    val endDate: String
 )

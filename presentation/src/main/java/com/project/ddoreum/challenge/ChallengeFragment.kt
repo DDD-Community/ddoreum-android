@@ -53,10 +53,11 @@ class ChallengeFragment : BaseFragment<FragmentChallengeBinding>(R.layout.fragme
 
     private fun collectOnGoingChallengeListFlow() = lifecycleScope.launchWhenCreated {
         viewModel.inProgressChallengeData.collect {
+            onGoingChallengeListAdapter.submitList(it)
             if (it.isNullOrEmpty()) {
-                Toast.makeText(requireContext(), "진행중인 챌린지가 없습니당", Toast.LENGTH_SHORT).show()
+                binding.tvSuccessChallengeMsg.text = "진행중인 \n챌린지가 없습니당"
             } else {
-                Toast.makeText(requireContext(), "진행중인 챌린지가 ${it.size}개 있습니당", Toast.LENGTH_SHORT).show()
+                binding.tvSuccessChallengeMsg.text = "진행중인 \n${it.size}개의 챌린지가 있습니당"
             }
         }
     }
@@ -81,7 +82,7 @@ class ChallengeFragment : BaseFragment<FragmentChallengeBinding>(R.layout.fragme
 
     private val onGoingChallengeListAdapter by lazy {
         OnGoingChallengeListAdapter {
-
+            
         }
     }
 }
