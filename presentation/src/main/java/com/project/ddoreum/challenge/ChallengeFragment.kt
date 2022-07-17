@@ -1,14 +1,13 @@
 package com.project.ddoreum.challenge
 
 import android.content.Intent
-import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.project.ddoreum.R
 import com.project.ddoreum.challenge.detail.ChallengeDetailActivity
 import com.project.ddoreum.core.BaseFragment
 import com.project.ddoreum.databinding.FragmentChallengeBinding
-import com.project.ddoreum.mountaininfo.detail.MountainInfoDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,6 +52,7 @@ class ChallengeFragment : BaseFragment<FragmentChallengeBinding>(R.layout.fragme
 
     private fun collectOnGoingChallengeListFlow() = lifecycleScope.launchWhenCreated {
         viewModel.inProgressChallengeData.collect {
+            binding.tvEmptyInProgressChallenge.isVisible = it.isNullOrEmpty()
             onGoingChallengeListAdapter.submitList(it)
             if (it.isNullOrEmpty()) {
                 binding.tvSuccessChallengeMsg.text = "진행중인 \n챌린지가 없습니당"
