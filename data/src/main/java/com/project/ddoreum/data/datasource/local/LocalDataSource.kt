@@ -17,9 +17,6 @@ interface LocalDataSource {
     fun getUserInfo(): Flow<Triple<String, String, String?>>
     fun setUserInfo(userInfo: Triple<String, String, String?>)
 
-    fun getInProgressChallengeData(): Flow<HashMap<Int, Triple<String, Int, String>>>
-    fun setInProgressChallengeData(key: Int, data: Triple<String, Int, String>)
-
     var recentSearchKeywordList: HashSet<String>
     var favoriteMountainList: HashSet<String>
 

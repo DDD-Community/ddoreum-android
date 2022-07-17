@@ -136,6 +136,7 @@ class LocalDataSourceImpl @Inject constructor(@ApplicationContext context: Conte
                 .putString(LOGGED_IN_USER_INFO, jsonString)
                 .apply()
         }
+
     override var inProgressChallengeData: HashMap<Int, Triple<String, Int, String>>
         get() {
             val jsonString = sharedPrefs.getString(IN_PROGRESS_CHALLENGE_DATA, "") ?: ""
