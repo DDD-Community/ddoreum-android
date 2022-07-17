@@ -64,7 +64,7 @@ class ChallengeFragment : BaseFragment<FragmentChallengeBinding>(R.layout.fragme
 
     private val periodChallengeListAdapter by lazy {
         PeriodChallengeListAdapter {
-            val intent = Intent(activity, ChallengeDetailActivity::class.java).apply {
+            val intent = Intent(requireContext(), ChallengeDetailActivity::class.java).apply {
                 putExtra("challenge_id", it.id)
             }
             startActivity(intent)
@@ -73,7 +73,7 @@ class ChallengeFragment : BaseFragment<FragmentChallengeBinding>(R.layout.fragme
 
     private val locationChallengeListAdapter by lazy {
         PeriodChallengeListAdapter {
-            val intent = Intent(activity, ChallengeDetailActivity::class.java).apply {
+            val intent = Intent(requireContext(), ChallengeDetailActivity::class.java).apply {
                 putExtra("challenge_id", it.id)
             }
             startActivity(intent)
