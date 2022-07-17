@@ -10,9 +10,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 
-class LocalDataSourceImpl @Inject constructor(@ApplicationContext context: Context) :
-    LocalDataSource {
+class LocalDataSourceImpl @Inject constructor(@ApplicationContext context: Context) : LocalDataSource {
 
     private val sharedPrefs: SharedPreferences by lazy {
         context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
@@ -22,9 +23,14 @@ class LocalDataSourceImpl @Inject constructor(@ApplicationContext context: Conte
 
     private val recentSearchKeywordFlow = MutableStateFlow(recentSearchKeywordList)
 
+    private val inProgressChallengeFlow = MutableStateFlow(inProgressChallengeData)
+
     private val userInfoFlow = MutableStateFlow(userInfoData)
 
     override fun addFavoriteMountain(data: MountainDetailInfoData) {
+        if (favoriteMountainList == null) {
+            favoriteMountainList = hashSetOf()
+        }
         favoriteMountainList = favoriteMountainList.apply {
             add(data.mountainCode.toString())
         }
@@ -65,6 +71,19 @@ class LocalDataSourceImpl @Inject constructor(@ApplicationContext context: Conte
 
     override fun setUserInfo(userInfo: Triple<String, String, String?>) {
         userInfoData = userInfo
+    }
+
+    override fun getInProgressChallengeData(): Flow<HashMap<Int, Triple<String, Int, String>>> {
+        return inProgressChallengeFlow
+    }
+
+    override fun setInProgressChallengeData(key: Int, data: Triple<String, Int, String>) {
+        if (inProgressChallengeData == null) {
+            inProgressChallengeData = hashMapOf()
+        }
+        inProgressChallengeData = inProgressChallengeData.apply {
+            this[key] = data
+        }
     }
 
     override var favoriteMountainList: HashSet<String>
@@ -118,9 +137,28 @@ class LocalDataSourceImpl @Inject constructor(@ApplicationContext context: Conte
                 .apply()
         }
 
+    override var inProgressChallengeData: HashMap<Int, Triple<String, Int, String>>
+        get() {
+            val jsonString = sharedPrefs.getString(IN_PROGRESS_CHALLENGE_DATA, "") ?: ""
+            return try {
+                return Gson().fromJson(
+                    jsonString,
+                    object : TypeToken<HashMap<Int, Triple<String, Int, String>>>() {}.type
+                ) as? HashMap<Int, Triple<String, Int, String>> ?: hashMapOf()
+            } catch (e: Exception) {
+                HashMap()
+            }
+        }
+        set(value) {
+            inProgressChallengeFlow.value = value
+            val jsonString = Gson().toJson(value)
+            sharedPrefs.edit().putString(IN_PROGRESS_CHALLENGE_DATA, jsonString).apply()
+        }
+
     companion object {
         const val FAVORITE_LIST = "favorite_list"
         const val RECENT_SEARCH_KEYWORD_LIST = "recent_search_keyword_list"
         const val LOGGED_IN_USER_INFO = "logged_in_user_info"
+        const val IN_PROGRESS_CHALLENGE_DATA = "in_progress_challenge_data"
     }
 }

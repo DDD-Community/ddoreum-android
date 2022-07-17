@@ -144,4 +144,9 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="Ddoreum.Font.ChallengeTitle">
+        <item name="android:textSize">@dimen/ddoreum_font_subhead1</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_bold</item>
+        <item name="android:textColor">@color/gray_07</item>
+    </style>
 </resources>

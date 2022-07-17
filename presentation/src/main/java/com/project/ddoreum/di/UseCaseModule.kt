@@ -2,7 +2,9 @@ package com.project.ddoreum.di
 
 import com.project.ddoreum.domain.repository.ChallengeRepository
 import com.project.ddoreum.domain.repository.MountainRepository
+import com.project.ddoreum.domain.usecase.challenge.AddInProgressChallengeUseCase
 import com.project.ddoreum.domain.usecase.challenge.GetAllChallengeListUseCase
+import com.project.ddoreum.domain.usecase.challenge.GetAllINProgressChallengeUseCase
 import com.project.ddoreum.domain.usecase.intro.GetUserInfoUseCase
 import com.project.ddoreum.domain.usecase.intro.SetUserInfoUseCase
 import com.project.ddoreum.domain.usecase.mountain.GetAllMountainInfoUseCase
@@ -67,4 +69,12 @@ object UseCaseModule {
     @Provides
     @ViewModelScoped
     fun provideSetUserInfoUseCase(mountainRepository: MountainRepository) = SetUserInfoUseCase(mountainRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetAllINProgressChallengeUseCase(challengeRepository: ChallengeRepository) = GetAllINProgressChallengeUseCase(challengeRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideAddInProgressChallengeUseCase(challengeRepository: ChallengeRepository) = AddInProgressChallengeUseCase(challengeRepository)
 }

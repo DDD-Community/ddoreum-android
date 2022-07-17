@@ -14,6 +14,9 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.project.ddoreum.domain.entity.challenge.ChallengeMountainData
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun String.highLightWord(forceWord: String, color: Int): SpannableString {
     return SpannableString(this).apply {
@@ -56,4 +59,35 @@ fun <T : ViewDataBinding> viewBind(parent: ViewGroup, layoutRes: Int): T {
         parent,
         false
     )
+}
+
+fun getYearAfterDate(today: String, numberYear: Int): String {
+    return if (!today.isNullOrEmpty()) {
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        val calendar = Calendar.getInstance()
+        val afterDate = sdf.parse(today)
+        calendar.time = afterDate
+        calendar.add(Calendar.YEAR, numberYear)
+        sdf.format(calendar.time)
+    } else {
+        ""
+    }
+}
+
+fun getAcheivePercent(type: String, succeedCount: Int, verifyListSize: Int?, verifyCount: Int?): Int {
+    when (type) {
+        "PERIOD" -> {
+            verifyCount?.let {
+                return (succeedCount/it) * 100
+            }
+            return 0
+        }
+        "LOCATION" -> {
+            verifyListSize?.let {
+                return (succeedCount/it) * 100
+            }
+            return 0
+        }
+        else -> return 0
+    }
 }

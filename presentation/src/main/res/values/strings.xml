@@ -18,4 +18,8 @@
     <string name="login_success">%s님. 또오름에 다시 오셨군요!</string>
 
 
+    <!-- Challenge -->
+    <string name="challenge_sub_title_on_going">진행 중 챌린지</string>
+    <string name="challenge_sub_title_period">기간 별 챌린지</string>
+    <string name="challenge_sub_title_location">위치 별 챌린지</string>
 </resources>
