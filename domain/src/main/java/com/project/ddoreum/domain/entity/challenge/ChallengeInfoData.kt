@@ -29,10 +29,20 @@ data class ChallengeInfoData(
                 description = "등산이 처음이라면?\n" +
                         "관악산 연주대",
                 type = "",
+                id = 0,
+                displayImage = "",
+                count = 0,
+                verifyCount = 0,
+                verifyPeriod = "",
                 verifyList = listOf()
             ),
             ChallengeInfoData(
                 name = "감악산",
+                id = 0,
+                displayImage = "",
+                count = 0,
+                verifyCount = 0,
+                verifyPeriod = "",
                 description = "여름에 오르기 좋은 \n" +
                         "도봉산 신선대",
                 type = "",
@@ -40,6 +50,11 @@ data class ChallengeInfoData(
             ),
             ChallengeInfoData(
                 name = "1234산",
+                id = 0,
+                displayImage = "",
+                count = 0,
+                verifyCount = 0,
+                verifyPeriod = "",
                 description = "등산이 처음이라면? 관악산 연주대",
                 type = "",
                 verifyList = listOf()

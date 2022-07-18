@@ -36,8 +36,14 @@
     </style>
 
     <style name="DdoreumBottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppBottomSheetModalStyle</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:configChanges">screenSize</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="AppBottomSheetModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bg_bottomsheet</item>
-        <item name="android:statusBarColor">@color/white</item>
     </style>
 
     <style name="DdoreumCTAButton" parent="Widget.AppCompat.Button">

@@ -33,6 +33,10 @@
     <string name="home_challenge_empty_description">새로운 챌린지 보러가기 >></string>
     <string name="home_recommend_mountain_title">이런 산 어때요?</string>
     <string name="home_recommend_challenge">새로운 챌린지에 도전해봐요!</string>
+    <string name="home_cert_title">인증하기</string>
+    <string name="home_cert_description">인증하고자 하는 산의 반경 500m 안에 있어야해요.</string>
+    <string name="home_record_title">기록하기</string>
+    <string name="home_record_description">위치 상관 없이 일기처럼 사진과 글을 기록해요.</string>
 
     <!-- MyPage -->
     <string name="mypage_my_orruem">나의 오름</string>

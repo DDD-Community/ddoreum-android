@@ -3,6 +3,6 @@ package com.project.ddoreum.home
 sealed interface HomeState {
 
     object Init : HomeState
-    object CLick: HomeState
+    object ClickCert: HomeState
 
 }

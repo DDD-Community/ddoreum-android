@@ -2,8 +2,10 @@ package com.project.ddoreum.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.project.ddoreum.core.BaseViewModel
 import com.project.ddoreum.di.IoDispatcher
+import com.project.ddoreum.di.MainDispatcher
 import com.project.ddoreum.domain.entity.challenge.ChallengeInfoData
 import com.project.ddoreum.domain.usecase.challenge.GetAllChallengeListUseCase
 import com.project.ddoreum.model.MountainRecommend
@@ -15,11 +17,13 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getAllChallengeListUseCase: GetAllChallengeListUseCase,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    @MainDispatcher private val mainDispatcher: CoroutineDispatcher
 ) : BaseViewModel() {
 
     private val _name = MutableLiveData<String>()
@@ -64,6 +68,12 @@ class HomeViewModel @Inject constructor(
         _challengeList.value = listOf(20, 30, 50, 100)
         _recommendList.value = MountainRecommend.defaultList
         _recommendChallengeList.value = ChallengeInfoData.default
+    }
+
+    fun onClickCertButton() {
+        viewModelScope.launch(mainDispatcher) {
+            _state.emit(HomeState.ClickCert)
+        }
     }
 
 
