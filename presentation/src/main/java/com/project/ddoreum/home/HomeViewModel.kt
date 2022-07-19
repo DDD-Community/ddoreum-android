@@ -30,8 +30,12 @@ class HomeViewModel @Inject constructor(
     val name: LiveData<String>
         get() = _name
 
-    private val _state = MutableSharedFlow<HomeState>()
-    val state: SharedFlow<HomeState>
+    private val _event = MutableSharedFlow<HomeViewEvent>()
+    val event: SharedFlow<HomeViewEvent>
+        get() = _event
+
+    private val _state = MutableStateFlow<HomeState>(HomeState.Init)
+    val state: StateFlow<HomeState>
         get() = _state
 
     private val _userInfo = MutableLiveData<UserInfo>()
@@ -72,7 +76,7 @@ class HomeViewModel @Inject constructor(
 
     fun onClickCertButton() {
         viewModelScope.launch(mainDispatcher) {
-            _state.emit(HomeState.ClickCert)
+            _event.emit(HomeViewEvent.ClickCert)
         }
     }
 

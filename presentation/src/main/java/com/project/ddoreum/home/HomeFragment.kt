@@ -48,15 +48,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 adapter = HomeChallengeRecommendAdapter()
             }
         }
-
     }
 
     override fun setupCollect() {
         repeatCallDefaultOnStarted {
+            viewModel.event.collect { event ->
+                when (event) {
+                    HomeViewEvent.ClickCert -> {
+                        showCertBottomSheet()
+                    }
+                }
+            }
+        }
+
+        repeatCallDefaultOnStarted {
             viewModel.state.collect { state ->
                 when (state) {
-                    HomeState.ClickCert -> {
-                        showCertBottomSheet()
+                    HomeState.Init -> {
+                        // TODO : Home Fragment Init시 가져올 데이터 정리
                     }
                 }
             }
