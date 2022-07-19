@@ -37,6 +37,14 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
 
+
+        <!-- OpenSource -->
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity" />
+
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity" />
+
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="opqzyjxjjg" />

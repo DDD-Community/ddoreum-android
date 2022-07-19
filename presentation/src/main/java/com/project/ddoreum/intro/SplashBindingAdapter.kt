@@ -7,11 +7,6 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.project.ddoreum.common.dp
 
-@BindingAdapter("bind:selected")
-fun View.bindSelected(isSelected: Boolean) {
-    this.isSelected = isSelected
-}
-
 @BindingAdapter("bind:visible")
 fun View.bindVisible(isVisible: Boolean) {
     this.isVisible = isVisible

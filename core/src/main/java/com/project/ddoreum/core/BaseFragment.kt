@@ -29,9 +29,12 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val layoutId
         super.onViewCreated(view, savedInstanceState)
 
         initLayout()
+        setupCollect()
     }
 
     protected abstract fun initLayout()
+
+    protected open fun setupCollect() = Unit
 
     protected fun bind(action: T.() -> Unit) {
         binding.run(action)
