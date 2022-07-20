@@ -3,25 +3,27 @@ package com.project.ddoreum.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.project.ddoreum.challenge.ChallengeViewModel
+import com.project.ddoreum.common.getYearAfterDate
 import com.project.ddoreum.core.BaseViewModel
 import com.project.ddoreum.di.IoDispatcher
 import com.project.ddoreum.di.MainDispatcher
 import com.project.ddoreum.domain.entity.challenge.ChallengeInfoData
+import com.project.ddoreum.domain.entity.challenge.InProgressChallengeData
 import com.project.ddoreum.domain.usecase.challenge.GetAllChallengeListUseCase
+import com.project.ddoreum.domain.usecase.challenge.GetAllINProgressChallengeUseCase
 import com.project.ddoreum.model.MountainRecommend
 import com.project.ddoreum.model.UserInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getAllChallengeListUseCase: GetAllChallengeListUseCase,
+    private val getAllINProgressChallengeUseCase: GetAllINProgressChallengeUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @MainDispatcher private val mainDispatcher: CoroutineDispatcher
 ) : BaseViewModel() {
@@ -42,11 +44,6 @@ class HomeViewModel @Inject constructor(
     val userInfo: LiveData<UserInfo>
         get() = _userInfo
 
-    // TODO : home list들 변경 필요
-    private val _challengeList = MutableStateFlow<List<Int>>(emptyList())
-    val challengeList: StateFlow<List<Int>>
-        get() = _challengeList
-
     private val _recommendList = MutableStateFlow<List<MountainRecommend>>(emptyList())
     val recommendList: StateFlow<List<MountainRecommend>>
         get() = _recommendList
@@ -54,6 +51,9 @@ class HomeViewModel @Inject constructor(
     private val _recommendChallengeList = MutableStateFlow<List<ChallengeInfoData>>(emptyList())
     val recommendChallengeList: StateFlow<List<ChallengeInfoData>>
         get() = _recommendChallengeList
+
+    private val _inProgressChallengeData = MutableStateFlow<List<InProgressChallengeData>>(emptyList())
+    val inProgressChallengeData: StateFlow<List<InProgressChallengeData>> get() = _inProgressChallengeData
 
     fun getRecommendedChallengeList() {
         // TODO : 챌린지 리스트 가져와서 랜덤으로 뿌릴 예정
@@ -64,14 +64,47 @@ class HomeViewModel @Inject constructor(
 //        }
     }
 
+    private fun getInProgressChallengeList() {
+        viewModelScope.launch(ioDispatcher) {
+            val inProgressData = getAllINProgressChallengeUseCase.invoke(Unit) ?: emptyFlow()
+            val allChallengeData = getAllChallengeListUseCase.invoke(ChallengeViewModel.CHALLENGE_KEY)
+            combine(inProgressData, allChallengeData) { inProgress, allChallenge ->
+                val inProgressList = mutableListOf<InProgressChallengeData>()
+                allChallenge.forEach {
+                    if (inProgress.containsKey(it.id)) {
+                        createInProgressList(inProgressList, it, inProgress[it.id]?.second ?: 0, inProgress[it.id]?.third ?: "")
+                    }
+                }
+                _inProgressChallengeData.update { inProgressList }
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    private fun createInProgressList(mutableList: MutableList<InProgressChallengeData>, data: ChallengeInfoData, succeedCount: Int, startDate: String) {
+        mutableList.add(
+            InProgressChallengeData(
+                name = data.name,
+                id = data.id,
+                type = data.type,
+                count = data.count,
+                verifyList = data.verifyList,
+                verifyCount = data.verifyCount,
+                verifyPeriod = data.verifyPeriod,
+                succeedCount = succeedCount,
+                startDate = startDate,
+                endDate = getYearAfterDate(startDate, 1)
+            )
+        )
+    }
+
     init {
         _name.value = "산또오름"
         _userInfo.value = UserInfo.default
 
         // TODO : 더미데이터 삭제
-        _challengeList.value = listOf(20, 30, 50, 100)
         _recommendList.value = MountainRecommend.defaultList
         _recommendChallengeList.value = ChallengeInfoData.default
+        getInProgressChallengeList()
     }
 
     fun onClickCertButton() {
