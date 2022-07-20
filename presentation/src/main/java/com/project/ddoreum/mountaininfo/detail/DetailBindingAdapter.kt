@@ -43,7 +43,6 @@ fun setDetailImage(view: ImageView, url: String?) {
             .asBitmap()
             .load(url)
             .thumbnail(0.7f)
-            .override(view.width, view.height)
             .into(object : CustomViewTarget<ImageView, Bitmap>(view) {
                 override fun onLoadFailed(errorDrawable: Drawable?) {}
                 override fun onResourceCleared(placeholder: Drawable?) {}

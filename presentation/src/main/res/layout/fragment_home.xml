@@ -209,7 +209,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recommend_list"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="60dp"
                     android:nestedScrollingEnabled="false"
@@ -244,7 +244,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/header_challenge_recommend"
-                    bind:list_item="@{vm.recommendChallengeList}"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_home_mountain_recommend" />
 

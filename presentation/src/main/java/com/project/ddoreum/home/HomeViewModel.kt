@@ -75,6 +75,7 @@ class HomeViewModel @Inject constructor(
                         createInProgressList(inProgressList, it, inProgress[it.id]?.second ?: 0, inProgress[it.id]?.third ?: "")
                     }
                 }
+                _recommendChallengeList.update { allChallenge.shuffled() }
                 _inProgressChallengeData.update { inProgressList }
             }.launchIn(viewModelScope)
         }

@@ -46,7 +46,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
             challengeRecommendList.apply {
                 LinearSnapHelper().attachToRecyclerView(this)
-                adapter = HomeChallengeRecommendAdapter()
+                adapter = challengeRecommendAdapter
             }
         }
     }
@@ -79,6 +79,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 onGoingChallengeListAdapter.submitList(result)
             }
         }
+
+        repeatCallDefaultOnStarted {
+            viewModel.recommendChallengeList.collect {
+                challengeRecommendAdapter.submitList(it)
+            }
+        }
     }
 
     private fun showCertBottomSheet() {
@@ -89,6 +95,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val onGoingChallengeListAdapter by lazy {
         OnGoingChallengeListAdapter {
         }
+    }
+
+    private val challengeRecommendAdapter by lazy {
+        HomeChallengeRecommendAdapter()
     }
 
     companion object {
