@@ -15,6 +15,7 @@ import com.project.ddoreum.di.MainDispatcher
 import com.project.ddoreum.home.certify.HomeCertifyBottomSheet
 import com.project.ddoreum.home.newchallenge.HomeChallengeRecommendAdapter
 import com.project.ddoreum.home.recommend.HomeMountainRecommendAdapter
+import com.project.ddoreum.mountaininfo.detail.MountainInfoDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
@@ -42,8 +43,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
             recommendList.apply {
                 LinearSnapHelper().attachToRecyclerView(this)
-                // TODO : 산 추천 리스트 받으면 재진행
-                adapter = HomeMountainRecommendAdapter()
+                adapter = mountainRecommendAdapter
             }
 
             challengeRecommendList.apply {
@@ -69,6 +69,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 when (state) {
                     HomeState.Init -> {
                         viewModel.getUserName()
+                        viewModel.getRecommendedMountainData()
                     }
                 }
             }
@@ -94,6 +95,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             .show(parentFragmentManager, HomeCertifyBottomSheet.TAG)
     }
 
+    private val mountainRecommendAdapter by lazy {
+        HomeMountainRecommendAdapter { mountainName ->
+            mountainName?.let { goToMountainDetail(it) }
+        }
+    }
+
+
     private val onGoingChallengeListAdapter by lazy {
         OnGoingChallengeListAdapter { challengeData ->
             goToChallengeDetail(challengeData.id)
@@ -105,6 +113,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             goToChallengeDetail(challengeId)
         }
     }
+
+    private fun goToMountainDetail(mountainName: String) {
+        startActivity(Intent(requireContext(), MountainInfoDetailActivity::class.java).apply {
+            putExtra("mountainName", mountainName)
+        })
+    }
+
 
     private fun goToChallengeDetail(challengeId: Int) {
         startActivity(Intent(requireContext(), ChallengeDetailActivity::class.java).apply {

@@ -31,11 +31,5 @@ class MountainInfoDetailActivity : BaseActivity<ActivityMountainInfoDetailBindin
 
     companion object {
         const val MOUNTAIN_NAME = "mountainName"
-        fun newInstance(mountainName: String): MountainInfoDetailActivity {
-            return MountainInfoDetailActivity().apply {
-                intent.putExtra(MOUNTAIN_NAME, mountainName)
-            }
-        }
     }
-
 }

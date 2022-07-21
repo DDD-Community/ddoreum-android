@@ -3,10 +3,11 @@ package com.project.ddoreum.home.recommend
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.project.ddoreum.model.MountainRecommend
+import com.project.ddoreum.domain.entity.mountain.MountainInfoData
 
-class HomeMountainRecommendAdapter :
-    ListAdapter<MountainRecommend, HomeMountainRecommendViewHolder>(HomeMountainRecommendDiffUtil) {
+class HomeMountainRecommendAdapter(
+    private val listener: (String?) -> Unit
+) : ListAdapter<MountainInfoData, HomeMountainRecommendViewHolder>(HomeMountainRecommendDiffUtil) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -16,21 +17,21 @@ class HomeMountainRecommendAdapter :
     }
 
     override fun onBindViewHolder(holder: HomeMountainRecommendViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), listener)
     }
 
     companion object {
-        object HomeMountainRecommendDiffUtil : DiffUtil.ItemCallback<MountainRecommend>() {
+        object HomeMountainRecommendDiffUtil : DiffUtil.ItemCallback<MountainInfoData>() {
             override fun areItemsTheSame(
-                oldItem: MountainRecommend,
-                newItem: MountainRecommend
+                oldItem: MountainInfoData,
+                newItem: MountainInfoData
             ): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.mountainInfo.mountainCode == newItem.mountainInfo.mountainCode
             }
 
             override fun areContentsTheSame(
-                oldItem: MountainRecommend,
-                newItem: MountainRecommend
+                oldItem: MountainInfoData,
+                newItem: MountainInfoData
             ): Boolean {
                 return oldItem == newItem
             }

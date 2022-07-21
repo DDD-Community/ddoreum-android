@@ -218,7 +218,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/header_mountain_recommend"
-                    bind:list_item="@{vm.recommendList}"
+                    bind:list_item="@{vm.recommendedMountainList}"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_home_mountain_recommend" />
 
