@@ -135,20 +135,66 @@
                     app:layout_constraintTop_toBottomOf="@id/user_history"
                     app:titleText="@{@string/home_challenge_continuing}" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/challenge_list"
-                    android:layout_width="0dp"
+                <FrameLayout
+                    android:id="@+id/layout_in_progress_challenge"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="60dp"
-                    android:nestedScrollingEnabled="false"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@+id/header_mountain_recommend"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/header_challenge_continuing"
-                    bind:list_item="@{vm.challengeList}"
-                    tools:itemCount="3"
-                    tools:listitem="@layout/item_home_challenge" />
+                    app:layout_constraintTop_toBottomOf="@id/header_challenge_continuing">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/challenge_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="60dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_empty_challenge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="16dp"
+                        app:cardCornerRadius="6dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/bg_dot_card">
+
+                            <TextView
+                                android:id="@+id/tv_empty_challenge"
+                                style="@style/Ddoreum.Font.Subhead1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="28dp"
+                                android:gravity="center"
+                                android:text="아직 진행 중인 챌린지가 없어요"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="28dp"
+                                android:text="새로운 챌린지 보러 가기 ≫"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tv_empty_challenge" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </FrameLayout>
+
 
                 <include
                     android:id="@+id/header_mountain_recommend"
@@ -158,12 +204,12 @@
                     android:layout_marginTop="40dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/challenge_list"
+                    app:layout_constraintTop_toBottomOf="@id/layout_in_progress_challenge"
                     app:titleText="@{@string/home_recommend_mountain_title}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recommend_list"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="60dp"
                     android:nestedScrollingEnabled="false"
@@ -198,7 +244,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/header_challenge_recommend"
-                    bind:list_item="@{vm.recommendChallengeList}"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_home_mountain_recommend" />
 

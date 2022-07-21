@@ -1,6 +1,7 @@
 package com.project.ddoreum.challenge
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -21,6 +22,7 @@ class OnGoingChallengeListAdapter(
                 oldItem: InProgressChallengeData,
                 newItem: InProgressChallengeData
             ): Boolean {
+                Log.d("Adapter :: ", "areItemsTheSame")
                 return oldItem.id == newItem.id
             }
 
@@ -28,6 +30,7 @@ class OnGoingChallengeListAdapter(
                 oldItem: InProgressChallengeData,
                 newItem: InProgressChallengeData
             ): Boolean {
+                Log.d("Adapter :: ", "areContentsTheSame")
                 return oldItem == newItem
             }
         }
@@ -41,6 +44,7 @@ class OnGoingChallengeListAdapter(
             onClick: (InProgressChallengeData) -> Unit
         ) {
             //30% 달성 (18회/60회)
+            Log.d("Adapter :: ", "onbind")
             binding.data = item
             val acheivePercent = getAcheivePercent(item.type, item.succeedCount, item.verifyList?.size, item.verifyCount)
             val totalCount = if (item.type == "PERIOD") item.verifyCount else item.verifyList?.size
@@ -53,10 +57,12 @@ class OnGoingChallengeListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MountainInfoViewHolder {
+        Log.d("Adapter :: ", "onCreateViewHolder")
         return MountainInfoViewHolder(viewBind(parent, R.layout.layout_challenge_progress_item))
     }
 
     override fun onBindViewHolder(holder: MountainInfoViewHolder, position: Int) {
+        Log.d("Adapter :: ", "onBindViewHolder")
         return holder.onBind(getItem(position), onClick)
     }
 }

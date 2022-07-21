@@ -1,20 +1,21 @@
 package com.project.ddoreum.home
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.project.ddoreum.R
+import com.project.ddoreum.challenge.OnGoingChallengeListAdapter
 import com.project.ddoreum.common.hikingprogress.HikingProgressAdapter
 import com.project.ddoreum.common.repeatCallDefaultOnStarted
 import com.project.ddoreum.core.BaseFragment
 import com.project.ddoreum.databinding.FragmentHomeBinding
 import com.project.ddoreum.di.MainDispatcher
 import com.project.ddoreum.home.certify.HomeCertifyBottomSheet
-import com.project.ddoreum.home.challenge.HomeChallengeAdapter
 import com.project.ddoreum.home.newchallenge.HomeChallengeRecommendAdapter
 import com.project.ddoreum.home.recommend.HomeMountainRecommendAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
@@ -34,7 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
             challengeList.apply {
                 LinearSnapHelper().attachToRecyclerView(this)
-                adapter = HomeChallengeAdapter()
+                adapter = onGoingChallengeListAdapter
             }
 
             recommendList.apply {
@@ -45,7 +46,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
             challengeRecommendList.apply {
                 LinearSnapHelper().attachToRecyclerView(this)
-                adapter = HomeChallengeRecommendAdapter()
+                adapter = challengeRecommendAdapter
             }
         }
     }
@@ -71,11 +72,33 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
         }
 
+        repeatCallDefaultOnStarted {
+            viewModel.inProgressChallengeData.collect { result ->
+                binding.cvEmptyChallenge.isVisible = result.isNullOrEmpty()
+                binding.challengeList.isVisible = !result.isNullOrEmpty()
+                onGoingChallengeListAdapter.submitList(result)
+            }
+        }
+
+        repeatCallDefaultOnStarted {
+            viewModel.recommendChallengeList.collect {
+                challengeRecommendAdapter.submitList(it)
+            }
+        }
     }
 
     private fun showCertBottomSheet() {
         HomeCertifyBottomSheet.newInstance()
             .show(parentFragmentManager, HomeCertifyBottomSheet.TAG)
+    }
+
+    private val onGoingChallengeListAdapter by lazy {
+        OnGoingChallengeListAdapter {
+        }
+    }
+
+    private val challengeRecommendAdapter by lazy {
+        HomeChallengeRecommendAdapter()
     }
 
     companion object {

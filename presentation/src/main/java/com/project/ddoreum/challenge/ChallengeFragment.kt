@@ -52,7 +52,7 @@ class ChallengeFragment : BaseFragment<FragmentChallengeBinding>(R.layout.fragme
 
     private fun collectOnGoingChallengeListFlow() = lifecycleScope.launchWhenCreated {
         viewModel.inProgressChallengeData.collect {
-            binding.tvEmptyInProgressChallenge.isVisible = it.isNullOrEmpty()
+            binding.cvEmptyChallenge.isVisible = it.isNullOrEmpty()
             onGoingChallengeListAdapter.submitList(it)
             if (it.isNullOrEmpty()) {
                 binding.tvSuccessChallengeMsg.text = "진행중인 \n챌린지가 없습니당"

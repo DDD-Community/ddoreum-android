@@ -72,8 +72,8 @@ class ChallengeViewModel @Inject constructor(
     }
 
     companion object {
-        private val CHALLENGE_KEY = "challenge_list"
-        private const val PERIOD = "PERIOD"
-        private const val LOCATION = "LOCATION"
+        val CHALLENGE_KEY = "challenge_list"
+        const val PERIOD = "PERIOD"
+        const val LOCATION = "LOCATION"
     }
 }
