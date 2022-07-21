@@ -18,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.project.ddoreum.MainActivity
 import com.project.ddoreum.R
+import com.project.ddoreum.common.dp
 import com.project.ddoreum.core.BaseActivity
 import com.project.ddoreum.databinding.ActivitySplashBinding
 import com.project.ddoreum.di.MainDispatcher
@@ -70,6 +71,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
                 viewModel.state.collect { state ->
                     when (state) {
                         SplashState.Init -> {
+                            setLogoAnimate()
                             viewModel.initSplash()
                         }
                         SplashState.Permission -> {
@@ -103,6 +105,16 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
                 }
             }
         }
+    }
+
+    private fun setLogoAnimate() {
+        binding.title.animate()
+            .translationY(-130.dp.toFloat())
+            .setDuration(1000)
+            .alpha(1f)
+            .withEndAction {
+                binding.title.translationY = -130.dp.toFloat()
+            }
     }
 
     private fun startMainActivity() {
