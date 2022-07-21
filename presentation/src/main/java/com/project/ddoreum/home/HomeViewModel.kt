@@ -12,24 +12,34 @@ import com.project.ddoreum.domain.entity.challenge.ChallengeInfoData
 import com.project.ddoreum.domain.entity.challenge.InProgressChallengeData
 import com.project.ddoreum.domain.usecase.challenge.GetAllChallengeListUseCase
 import com.project.ddoreum.domain.usecase.challenge.GetAllINProgressChallengeUseCase
+import com.project.ddoreum.domain.usecase.intro.GetUserInfoUseCase
 import com.project.ddoreum.model.MountainRecommend
 import com.project.ddoreum.model.UserInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getAllChallengeListUseCase: GetAllChallengeListUseCase,
     private val getAllINProgressChallengeUseCase: GetAllINProgressChallengeUseCase,
+    private val getUserInfoUseCase: GetUserInfoUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @MainDispatcher private val mainDispatcher: CoroutineDispatcher
 ) : BaseViewModel() {
 
-    private val _name = MutableLiveData<String>()
-    val name: LiveData<String>
+    private val _name = MutableStateFlow<String>("")
+    val name: StateFlow<String>
         get() = _name
 
     private val _event = MutableSharedFlow<HomeViewEvent>()
@@ -52,27 +62,27 @@ class HomeViewModel @Inject constructor(
     val recommendChallengeList: StateFlow<List<ChallengeInfoData>>
         get() = _recommendChallengeList
 
-    private val _inProgressChallengeData = MutableStateFlow<List<InProgressChallengeData>>(emptyList())
-    val inProgressChallengeData: StateFlow<List<InProgressChallengeData>> get() = _inProgressChallengeData
+    private val _inProgressChallengeData =
+        MutableStateFlow<List<InProgressChallengeData>>(emptyList())
+    val inProgressChallengeData: StateFlow<List<InProgressChallengeData>>
+        get() = _inProgressChallengeData
 
-    fun getRecommendedChallengeList() {
-        // TODO : 챌린지 리스트 가져와서 랜덤으로 뿌릴 예정
-//        viewModelScope.launch(ioDispatcher) {
-//            getAllChallengeListUseCase.invoke(CHALLENGE_KEY).onEach { data ->
-//                _recommendChallengeList.update { data }
-//            }.launchIn(viewModelScope)
-//        }
-    }
 
     private fun getInProgressChallengeList() {
         viewModelScope.launch(ioDispatcher) {
             val inProgressData = getAllINProgressChallengeUseCase.invoke(Unit) ?: emptyFlow()
-            val allChallengeData = getAllChallengeListUseCase.invoke(ChallengeViewModel.CHALLENGE_KEY)
+            val allChallengeData =
+                getAllChallengeListUseCase.invoke(ChallengeViewModel.CHALLENGE_KEY)
             combine(inProgressData, allChallengeData) { inProgress, allChallenge ->
                 val inProgressList = mutableListOf<InProgressChallengeData>()
                 allChallenge.forEach {
                     if (inProgress.containsKey(it.id)) {
-                        createInProgressList(inProgressList, it, inProgress[it.id]?.second ?: 0, inProgress[it.id]?.third ?: "")
+                        createInProgressList(
+                            inProgressList,
+                            it,
+                            inProgress[it.id]?.second ?: 0,
+                            inProgress[it.id]?.third ?: ""
+                        )
                     }
                 }
                 _recommendChallengeList.update { allChallenge.shuffled() }
@@ -81,7 +91,12 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun createInProgressList(mutableList: MutableList<InProgressChallengeData>, data: ChallengeInfoData, succeedCount: Int, startDate: String) {
+    private fun createInProgressList(
+        mutableList: MutableList<InProgressChallengeData>,
+        data: ChallengeInfoData,
+        succeedCount: Int,
+        startDate: String
+    ) {
         mutableList.add(
             InProgressChallengeData(
                 name = data.name,
@@ -99,7 +114,6 @@ class HomeViewModel @Inject constructor(
     }
 
     init {
-        _name.value = "산또오름"
         _userInfo.value = UserInfo.default
 
         // TODO : 더미데이터 삭제
@@ -108,15 +122,22 @@ class HomeViewModel @Inject constructor(
         getInProgressChallengeList()
     }
 
+    fun getUserName() {
+        viewModelScope.launch(ioDispatcher) {
+            getUserInfoUseCase.invoke(Unit).onEach { userInfo ->
+                if (userInfo.first.isNotEmpty()) {
+                    _name.emit(userInfo.first)
+                } else {
+                    _name.emit("산또오름")
+                }
+                _state.emit(HomeState.UserInfo)
+            }.launchIn(viewModelScope)
+        }
+    }
+
     fun onClickCertButton() {
         viewModelScope.launch(mainDispatcher) {
             _event.emit(HomeViewEvent.ClickCert)
         }
     }
-
-
-    companion object {
-        private val CHALLENGE_KEY = "challenge_list"
-    }
-
 }

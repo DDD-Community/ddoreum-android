@@ -12,9 +12,13 @@ import com.project.ddoreum.common.highLightWord
 fun TextView.bindPermissionEssentialTag(fullText: String?, isEssential: Boolean?) {
     val tag = if (isEssential == true) "(필수)" else "(선택)"
 
-    fullText?.let {
+    if (isEssential == true) {
         this.text =
             "$fullText $tag".highLightWord(tag, ContextCompat.getColor(context, R.color.orange))
+
+    } else {
+        this.text =
+            "$fullText $tag".highLightWord(tag, ContextCompat.getColor(context, R.color.gray_04))
     }
 }
 

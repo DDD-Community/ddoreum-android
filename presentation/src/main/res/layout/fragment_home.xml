@@ -245,7 +245,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/header_challenge_recommend"
                     tools:itemCount="3"
-                    tools:listitem="@layout/item_home_mountain_recommend" />
+                    tools:listitem="@layout/item_home_challenge_recommend" />
 
                 <View
                     android:layout_width="0dp"

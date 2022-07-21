@@ -4,9 +4,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.project.ddoreum.domain.entity.challenge.ChallengeInfoData
-import com.project.ddoreum.model.MountainRecommend
 
-class HomeChallengeRecommendAdapter :
+class HomeChallengeRecommendAdapter(
+    private val listener: (Int) -> Unit
+) :
     ListAdapter<ChallengeInfoData, HomeChallengeRecommendViewHolder>(HomeMountainRecommendDiffUtil) {
 
     override fun onCreateViewHolder(
@@ -17,7 +18,7 @@ class HomeChallengeRecommendAdapter :
     }
 
     override fun onBindViewHolder(holder: HomeChallengeRecommendViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), listener)
     }
 
     companion object {

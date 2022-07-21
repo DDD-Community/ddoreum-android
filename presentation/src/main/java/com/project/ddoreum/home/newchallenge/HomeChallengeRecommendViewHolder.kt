@@ -4,16 +4,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.ddoreum.databinding.ItemHomeChallengeRecommendBinding
-import com.project.ddoreum.databinding.ItemHomeMountainRecommendBinding
 import com.project.ddoreum.domain.entity.challenge.ChallengeInfoData
-import com.project.ddoreum.model.MountainRecommend
 
 class HomeChallengeRecommendViewHolder(
     private val binding: ItemHomeChallengeRecommendBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: ChallengeInfoData) {
+    fun bind(item: ChallengeInfoData, listener: (Int) -> Unit) {
         binding.item = item
+
+        binding.root.setOnClickListener {
+            listener.invoke(item.id)
+        }
     }
 
     companion object {
