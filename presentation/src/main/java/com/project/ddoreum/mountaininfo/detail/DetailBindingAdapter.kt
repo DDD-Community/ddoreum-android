@@ -20,7 +20,7 @@ fun TextView.bindFirstVisibleAndSetText(data: MountainDetailInfoData?) {
         val result = it.location?.split(" ")?.get(0)
         this.isVisible = !result.isNullOrEmpty()
         if (!result.isNullOrEmpty()) {
-            this.text = result
+            this.text = result.replace(",", "")
         }
     }
 }
@@ -31,7 +31,7 @@ fun TextView.bindSecondVisibleAndSetText(data: MountainDetailInfoData?) {
         val result = it.location?.split(" ")?.get(1)
         this.isVisible = !result.isNullOrEmpty()
         if (!result.isNullOrEmpty()) {
-            this.text = result
+            this.text = result.replace(",", "")
         }
     }
 }

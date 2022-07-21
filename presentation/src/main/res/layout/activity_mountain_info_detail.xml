@@ -61,14 +61,13 @@
                     app:layout_constraintTop_toTopOf="@+id/tv_mountain_name_title"
                     app:setFavoriteMountain="@{viewmodel.mountainDetailData}" />
 
-                <TextView
+                <com.google.android.material.chip.Chip
                     android:id="@+id/hashtag_1"
                     style="@style/Ddoreum.Font.MountainDetailHashTagTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="16dp"
-                    android:background="@drawable/background_radius_card"
                     android:paddingStart="10dp"
                     android:paddingTop="8dp"
                     android:paddingEnd="10dp"
@@ -81,14 +80,13 @@
                     tools:text="100대 명산"
                     tools:visibility="visible" />
 
-                <TextView
+                <com.google.android.material.chip.Chip
                     android:id="@+id/hashtag_2"
                     style="@style/Ddoreum.Font.MountainDetailHashTagTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginBottom="16dp"
-                    android:background="@drawable/background_radius_card"
                     android:paddingStart="10dp"
                     android:paddingTop="8dp"
                     android:paddingEnd="10dp"
@@ -107,9 +105,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingStart="7dp"
+                    android:paddingStart="16dp"
                     android:paddingTop="16dp"
-                    android:paddingEnd="7dp"
+                    android:paddingEnd="16dp"
                     android:paddingBottom="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -119,20 +117,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:elevation="@null"
                         app:cardBackgroundColor="@color/gray_01"
-                        app:cardCornerRadius="8dp">
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="@null">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:paddingVertical="22dp">
 
                             <ImageView
                                 android:id="@+id/iv_location"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="16dp"
                                 android:paddingStart="43dp"
-                                android:paddingTop="16dp"
                                 android:paddingEnd="43dp"
                                 android:src="@drawable/ic_location"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -140,16 +138,14 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                style="@style/Ddoreum.Font.MountainDetailCardTitle"
+                                style="@style/Ddoreum.Font.Body2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:paddingBottom="16dp"
+                                android:layout_marginTop="8dp"
                                 android:text="위치"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/iv_location"
-
-                                />
+                                app:layout_constraintTop_toBottomOf="@+id/iv_location" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
@@ -157,22 +153,22 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:elevation="@null"
                         app:cardBackgroundColor="@color/gray_01"
-                        app:cardCornerRadius="8dp">
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="@null">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:paddingVertical="22dp">
 
                             <ImageView
                                 android:id="@+id/iv_call"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="16dp"
                                 android:paddingStart="43dp"
-                                android:paddingTop="16dp"
                                 android:paddingEnd="43dp"
                                 android:src="@drawable/ic_call"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -180,10 +176,10 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                style="@style/Ddoreum.Font.MountainDetailCardTitle"
+                                style="@style/Ddoreum.Font.Body2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:paddingBottom="16dp"
+                                android:layout_marginTop="8dp"
                                 android:text="전화"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -195,22 +191,22 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:elevation="@null"
                         app:cardBackgroundColor="@color/gray_01"
-                        app:cardCornerRadius="8dp">
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="@null">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:paddingVertical="22dp">
 
                             <ImageView
                                 android:id="@+id/iv_share"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="16dp"
                                 android:paddingStart="43dp"
-                                android:paddingTop="16dp"
                                 android:paddingEnd="43dp"
                                 android:src="@drawable/ic_share"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -218,16 +214,14 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                style="@style/Ddoreum.Font.MountainDetailCardTitle"
+                                style="@style/Ddoreum.Font.Body2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:paddingBottom="16dp"
+                                android:layout_marginTop="8dp"
                                 android:text="공유"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/iv_share"
-
-                                />
+                                app:layout_constraintTop_toBottomOf="@+id/iv_share" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>

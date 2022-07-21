@@ -2,8 +2,10 @@ package com.project.ddoreum.home
 
 import android.content.Intent
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearSnapHelper
+import com.project.ddoreum.MainViewModel
 import com.project.ddoreum.R
 import com.project.ddoreum.challenge.OnGoingChallengeListAdapter
 import com.project.ddoreum.challenge.detail.ChallengeDetailActivity
@@ -28,6 +30,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     lateinit var mainDispatcher: CoroutineDispatcher
 
     override val viewModel: HomeViewModel by viewModels()
+
+    private val activityViewModel: MainViewModel by activityViewModels()
 
     override fun initLayout() {
         bind {
@@ -59,6 +63,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 when (event) {
                     HomeViewEvent.ClickCert -> {
                         showCertBottomSheet()
+                    }
+                    HomeViewEvent.ClickChallenge -> {
+                        showChallengeTab()
                     }
                 }
             }
@@ -95,6 +102,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             .show(parentFragmentManager, HomeCertifyBottomSheet.TAG)
     }
 
+    private fun showChallengeTab() {
+        activityViewModel.setChallengeTab()
+    }
+
+
     private val mountainRecommendAdapter by lazy {
         HomeMountainRecommendAdapter { mountainName ->
             mountainName?.let { goToMountainDetail(it) }
@@ -116,18 +128,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun goToMountainDetail(mountainName: String) {
         startActivity(Intent(requireContext(), MountainInfoDetailActivity::class.java).apply {
-            putExtra("mountainName", mountainName)
+            putExtra(MountainInfoDetailActivity.MOUNTAIN_NAME, mountainName)
         })
     }
 
 
     private fun goToChallengeDetail(challengeId: Int) {
         startActivity(Intent(requireContext(), ChallengeDetailActivity::class.java).apply {
-            putExtra("challenge_id", challengeId)
+            putExtra(ChallengeDetailActivity.CHALLENGE_ID, challengeId)
         })
     }
 
     companion object {
-        fun newInstance() = HomeFragment()
+        fun newInstance(): HomeFragment {
+            return HomeFragment()
+        }
     }
 }

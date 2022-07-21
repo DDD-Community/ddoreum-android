@@ -158,4 +158,10 @@ class HomeViewModel @Inject constructor(
             _event.emit(HomeViewEvent.ClickCert)
         }
     }
+
+    fun onClickChallenge(){
+        viewModelScope.launch(mainDispatcher) {
+            _event.emit(HomeViewEvent.ClickChallenge)
+        }
+    }
 }
