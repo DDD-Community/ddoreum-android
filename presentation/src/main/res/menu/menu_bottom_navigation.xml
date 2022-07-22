@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/bottom_nav_home"
+        android:title="홈" />
+
+    <item
+        android:id="@+id/nav_record"
+        android:icon="@drawable/bottom_nav_record"
+        android:title="기록" />
+
+    <item
+        android:id="@+id/nav_mountain_info"
+        android:icon="@drawable/bottom_nav_mountain_info"
+        android:title="산 정보" />
+
+    <item
+        android:id="@+id/nav_challenge"
+        android:icon="@drawable/bottom_nav_challenge"
+        android:title="챌린지" />
+
+    <item
+        android:id="@+id/nav_my_page"
+        android:icon="@drawable/bottom_nav_my_page"
+        android:title="내오름" />
+</menu>

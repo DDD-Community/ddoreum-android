@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -36,6 +37,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.6.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+    implementation 'com.google.firebase:firebase-config-ktx:21.0.1'
 
     //hilt
     def hilt_version = "2.38.1"
@@ -48,6 +50,13 @@ dependencies {
     //paging
     implementation "androidx.paging:paging-common:3.0.0"
 
+    //gson
+    def RETROFIT = "2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:${RETROFIT}"
+
     //unit test
     testImplementation 'junit:junit:4.13.2'
+
+    // Alternatively - use the following artifact without an Android dependency.
+    implementation "androidx.preference:preference-ktx:1.1.1"
 }

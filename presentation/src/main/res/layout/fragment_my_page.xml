@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.project.ddoreum.mypage.MyPageViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".mypage.MyPageFragment">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            style="@style/Ddoreum.Font.Headline3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="17dp"
+            android:text="@string/mypage_my_orruem"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="나의 오름" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <View
+                    android:id="@+id/top_border"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#E7E7E7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/user_image"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_avatar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/top_border" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/user_name"
+                    style="@style/Ddoreum.Font.Subhead1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@{vm.name}"
+                    app:layout_constraintBottom_toTopOf="@id/user_description"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/user_image"
+                    app:layout_constraintTop_toTopOf="@id/user_image"
+                    tools:text="백두대간" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/user_description"
+                    style="@style/Ddoreum.Font.Description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="산행 시작한 지 12일 째"
+                    app:layout_constraintBottom_toBottomOf="@id/user_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/user_image"
+                    app:layout_constraintTop_toBottomOf="@id/user_name" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/user_history"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="#D6FF62"
+                    app:cardCornerRadius="@dimen/radius_xlarge"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/user_image">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="24dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/level"
+                            style="@style/Ddoreum.Font.Headline3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{@string/level_string(vm.userInfo.hikingLv)}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Lv 1" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/meter"
+                            style="@style/Ddoreum.Font.Headline1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="28dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/level"
+                            bind:user_hiking_meter="@{vm.userInfo.hikingElevation}"
+                            tools:text="1,250m" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/progress_list"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="36dp"
+                            android:nestedScrollingEnabled="false"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/meter"
+                            app:spanCount="4"
+                            bind:user_history_progress="@{vm.userInfo}"
+                            tools:itemCount="4"
+                            tools:listitem="@layout/item_hiking_progress" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/next_level_comment"
+                            style="@style/Ddoreum.Font.Description"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/progress_list"
+                            bind:user_hiking_remain_meter="@{vm.userInfo.remainElevation}"
+                            tools:text="다음 레벨까지 3,750m 남았어요!" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    android:id="@+id/divider_my_orreum"
+                    android:layout_width="0dp"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#F2F2F2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/user_history" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/header_my_orreum"
+                    style="@style/Ddoreum.Font.Headline3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="11dp"
+                    android:text="@string/mypage_my_orruem"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider_my_orreum"
+                    tools:text="나의 오름" />
+
+                <include
+                    android:id="@+id/climbing_history"
+                    layout="@layout/include_list_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/header_my_orreum"
+                    app:titleText="@{@string/mypage_climbing_history}" />
+
+                <include
+                    android:id="@+id/favorite_moutain"
+                    layout="@layout/include_list_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/climbing_history"
+                    app:titleText="@{@string/mypage_favorite}" />
+
+                <include
+                    android:id="@+id/completed_challenge"
+                    layout="@layout/include_list_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/favorite_moutain"
+                    app:titleText="@{@string/mypage_completed_challenge}" />
+
+                <View
+                    android:id="@+id/divider_setting"
+                    android:layout_width="0dp"
+                    android:layout_height="8dp"
+                    android:background="#F2F2F2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/completed_challenge" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/header_setting"
+                    style="@style/Ddoreum.Font.Headline3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="11dp"
+                    android:text="@string/mypage_setting"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider_setting"
+                    tools:text="설정" />
+
+                <include
+                    android:id="@+id/login_config"
+                    layout="@layout/include_list_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/header_setting"
+                    app:titleText="@{@string/mypage_login_config}" />
+
+                <View
+                    android:id="@+id/divider_app_version"
+                    android:layout_width="0dp"
+                    android:layout_height="8dp"
+                    android:background="#F2F2F2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/login_config" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/app_version"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:paddingHorizontal="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider_app_version">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title_app_version"
+                        style="@style/Ddoreum.Font.Body2"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/mypage_app_version"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="앱 버전" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/description_app_version"
+                        style="@style/Ddoreum.Font.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:gravity="center_vertical"
+                        android:text="@{@string/mypage_app_version_format(vm.appVersion)}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="0.0.0v" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <include
+                    android:id="@+id/opensource"
+                    layout="@layout/include_list_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:onClick="@{() -> vm.onClickOpenSource()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/app_version"
+                    app:titleText="@{@string/mypage_opensource}" />
+
+                <View
+                    android:id="@+id/divider_donate"
+                    android:layout_width="0dp"
+                    android:layout_height="8dp"
+                    android:background="#F2F2F2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/opensource" />
+
+                <include
+                    android:id="@+id/donate"
+                    layout="@layout/include_list_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider_donate"
+                    app:titleText="@{@string/mypage_donate}" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="#F2F2F2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/donate" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

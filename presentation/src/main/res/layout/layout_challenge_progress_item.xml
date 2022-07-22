@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.project.ddoreum.domain.entity.challenge.InProgressChallengeData" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/tv_challenge_title"
+                style="@style/Ddoreum.Font.Headline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.name}"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="주 1회 등산하기" />
+
+            <TextView
+                android:id="@+id/tv_challenge_period_title"
+                style="@style/Ddoreum.Font.Description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="도전 기간"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@+id/tv_challenge_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_challenge_title" />
+
+            <TextView
+                android:id="@+id/tv_challenge_period"
+                style="@style/Ddoreum.Font.Description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/tv_challenge_period_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_challenge_title"
+                tools:text="2022.05.29 - 2023.05.29" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="44dp"
+                android:max="100"
+                android:progressDrawable="@drawable/bg_progress_challenge"
+                android:progressTint="@color/orange"
+                app:layout_constraintTop_toBottomOf="@+id/tv_challenge_period_title"
+                tools:progress="72" />
+
+            <TextView
+                android:id="@+id/tv_progress_count"
+                style="@style/Ddoreum.Font.Description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progress"
+                tools:text="30% 달성 (18회/60회)" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

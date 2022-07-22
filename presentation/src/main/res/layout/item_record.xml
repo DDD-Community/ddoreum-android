@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/bind"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.project.ddoreum.model.Record" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="45dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/user_image"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_avatar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/user_name"
+            style="@style/Ddoreum.Font.Description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="@{item.userName}"
+            app:layout_constraintBottom_toTopOf="@id/hiking_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/user_image"
+            app:layout_constraintTop_toTopOf="@id/user_image"
+            tools:text="날듀람쥐" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/hiking_info"
+            style="@style/Ddoreum.Font.Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="@{@string/record_hiking_info_format(item.date, item.mountainName)}"
+            app:layout_constraintBottom_toBottomOf="@id/user_image"
+            app:layout_constraintStart_toEndOf="@id/user_image"
+            app:layout_constraintTop_toBottomOf="@id/user_name"
+            tools:text="2022.05.28 관악산" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/label_certified"
+            style="@style/Ddoreum.Font.Description"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/selector_record_label"
+            app:layout_constraintBottom_toBottomOf="@id/hiking_info"
+            app:layout_constraintStart_toEndOf="@id/hiking_info"
+            app:layout_constraintTop_toTopOf="@id/hiking_info"
+            bind:selected="@{item.isCertified}" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_more"
+            app:layout_constraintBottom_toBottomOf="@id/user_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/user_image" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/container_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:elevation="0dp"
+            android:scaleType="centerCrop"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_image">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                bind:image_src="@{item.image}"
+                tools:src="@drawable/image_record" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text"
+            style="@style/Ddoreum.Font.Body2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:text="@{item.text}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_image"
+            tools:text="1시간 18분 컷. 산이 한 번 정비가 되면서 계단이 많이 깔렸다. 원래 관악산은 돌 밟는 맛에 타는 건데... 기록은 잘 나왔지만 아쉬운 산행이었다. 다음엔 천마산으로 간다." />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

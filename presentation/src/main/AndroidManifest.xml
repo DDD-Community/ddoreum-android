@@ -2,16 +2,29 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.project.ddoreum">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".App"
-        android:theme="@style/Theme.Ddoreum">
+        android:theme="@style/Theme.Ddoreum"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".MainActivity"
+            android:name=".challenge.detail.ChallengeDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mountaininfo.detail.MountainInfoDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".intro.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +32,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+
+
+        <!-- OpenSource -->
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity" />
+
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity" />
+
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="opqzyjxjjg" />
+        <meta-data
+            android:name="com.project.ddoreum.di.GlideModule"
+            android:value="ImageGlideModule" />
     </application>
 
 </manifest>

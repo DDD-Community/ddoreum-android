@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.project.ddoreum.challenge.detail.ChallengeDetailViewModel" />
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".challenge.detail.ChallengeDetailActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/tv_challenge_title"
+                style="@style/Ddoreum.Font.Headline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:text="@{viewmodel.challengeDetailData.name}"
+                tools:text="백두대간 챌린지" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_challenge_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/black"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="도전하기"
+            android:visibility="@{viewmodel.inProgressState ? View.GONE : View.VISIBLE}"
+            android:onClick="@{()->viewmodel.addChallenge()}"
+            android:textColor="@color/white"
+            app:cornerRadius="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_challenge_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    loadDetailImage="@{viewmodel.challengeDetailData.displayImage}"
+                    app:layout_constraintDimensionRatio="36:22"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_challenge_description"
+                    style="@style/Ddoreum.Font.Body2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:ellipsize="end"
+                    android:maxLines="5"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@{viewmodel.challengeDetailData.description}"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_challenge_image"
+                    tools:text="한반도의 큰 축에 도전해보세요.  지리산 천왕봉에서 시작해 진부까지 총 100개의 명산을 거치는 종주 챌린지로 모든 챌린지중에서 가장 많은 시간과 노력이 필요합니다. 이 챌린지는 한반도 생태계의 큰 축인 백두대간의 친환경적인 탐방과 도전을 목표로 합니다." />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/header_challenge_verify_mountain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_challenge_description">
+
+                    <TextView
+                        android:id="@+id/tv_verify_list_title"
+                        style="@style/Ddoreum.Font.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="인증지 목록" />
+
+                    <ImageView
+                        android:id="@+id/iv_verify_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginBottom="13dp"
+                        android:src="@drawable/ic_arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_verify_mountain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/header_challenge_verify_mountain" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@color/gray_01"
+                    app:layout_constraintTop_toBottomOf="@+id/rcv_verify_mountain" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_challenge_verify_notice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="100dp"
+                    android:elevation="0dp"
+                    app:cardBackgroundColor="@color/gray_03"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="0dp"
+                            android:background="@color/gray_06"
+                            app:layout_constraintBottom_toTopOf="@+id/iv_step_6"
+                            app:layout_constraintEnd_toEndOf="@id/iv_step_1"
+                            app:layout_constraintStart_toStartOf="@id/iv_step_1"
+                            app:layout_constraintTop_toTopOf="@+id/iv_step_1" />
+
+                        <TextView
+                            android:id="@+id/tv_challenge_msg_title"
+                            style="@style/Ddoreum.Font.ChallengeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="12dp"
+                            android:text="인증 가이드 내용을 참고하여 \n도전 후 인증을 남기세요!"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/iv_step_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_hole"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_step_1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tv_step_1" />
+
+                        <TextView
+                            android:id="@+id/tv_step_1"
+                            style="@style/Ddoreum.Font.ChallengeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginTop="24dp"
+                            android:text="산행 시작하기"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_challenge_msg_title" />
+
+                        <TextView
+                            android:id="@+id/tv_step_2"
+                            style="@style/Ddoreum.Font.ChallengeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginTop="20dp"
+                            android:text="인증지 도착!"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_step_1" />
+
+                        <ImageView
+                            android:id="@+id/iv_step_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_hole"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_step_2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tv_step_2" />
+
+                        <TextView
+                            android:id="@+id/tv_step_2_notice_1"
+                            style="@style/Ddoreum.Font.Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginTop="4dp"
+                            android:text="* APP을 실행해주세요."
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_step_2" />
+
+                        <TextView
+                            android:id="@+id/tv_step_3"
+                            style="@style/Ddoreum.Font.ChallengeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginTop="20dp"
+                            android:text="인증 준비하기"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_step_2_notice_1" />
+
+                        <ImageView
+                            android:id="@+id/iv_step_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_hole"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_step_3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tv_step_3" />
+
+                        <TextView
+                            android:id="@+id/tv_step_3_notice_1"
+                            style="@style/Ddoreum.Font.Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginTop="4dp"
+                            android:text="* 인증지점 안에 있는지 확인하기\n* 위치정보 기능이 켜져있는지 확인하기\n* GPS 갱신하기"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_step_3" />
+
+                        <TextView
+                            android:id="@+id/tv_step_4"
+                            style="@style/Ddoreum.Font.ChallengeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginTop="20dp"
+                            android:text="사진 등록하기"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_step_3_notice_1" />
+
+                        <ImageView
+                            android:id="@+id/iv_step_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_hole_orange"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_step_4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tv_step_4" />
+
+                        <TextView
+                            android:id="@+id/tv_step_4_notice_1"
+                            style="@style/Ddoreum.Font.Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginTop="4dp"
+                            android:text="* 인증지 확인이 가능하도록 촬영하기\n* 도전 내용 기입하기"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_step_4" />
+
+                        <TextView
+                            android:id="@+id/tv_step_5"
+                            style="@style/Ddoreum.Font.ChallengeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginTop="20dp"
+                            android:text="등록 완료!"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_step_4_notice_1" />
+
+                        <ImageView
+                            android:id="@+id/iv_step_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_hole_orange"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_step_5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tv_step_5" />
+
+                        <TextView
+                            android:id="@+id/tv_step_5_notice_1"
+                            style="@style/Ddoreum.Font.Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginTop="4dp"
+                            android:text="* 등록 내용 확인 후 승인/거절까지 평균 2~3일 소요"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_step_5" />
+
+                        <TextView
+                            android:id="@+id/tv_step_6"
+                            style="@style/Ddoreum.Font.ChallengeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginTop="20dp"
+                            android:text="승인 완료!"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_step_5_notice_1" />
+
+                        <ImageView
+                            android:id="@+id/iv_step_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_hole_orange"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_step_6"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tv_step_6" />
+
+                        <TextView
+                            android:id="@+id/tv_step_6_notice_1"
+                            style="@style/Ddoreum.Font.Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginTop="4dp"
+                            android:text="* 앞으로도 계속되는 도전과 새로운 탐험을 즐겨보세요."
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_step_6"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:paddingBottom="10dp"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

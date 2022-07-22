@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.project.ddoreum.domain.entity.mountain.MountainInfoData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_mountain_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:loadDetailImage="@{data.mountainInfo.mountainImage}" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_mountain_name"
+            style="@style/Ddoreum.Font.MountainTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@{data.mountainInfo.name}"
+            app:layout_constraintStart_toEndOf="@+id/cv_mountain_img"
+            app:layout_constraintTop_toTopOf="@id/cv_mountain_img"
+            tools:text="도봉산" />
+
+        <TextView
+            android:id="@+id/tv_mountain_address"
+            style="@style/Ddoreum.Font.MountainSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_mountain_img"
+            app:layout_constraintStart_toEndOf="@+id/cv_mountain_img"
+            app:layout_constraintTop_toBottomOf="@id/tv_mountain_name"
+            tools:text="서울시 도봉구" />
+
+        <TextView
+            android:id="@+id/tv_mountain_elevation"
+            style="@style/Ddoreum.Font.MountainSubTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_mountain_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_mountain_address"
+            app:layout_constraintTop_toTopOf="@+id/tv_mountain_address"
+            tools:text="839m" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/gray_02"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_mountain_img" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="textAppearanceSubhead1" format="reference" />
+    <attr name="textAppearanceDescription" format="reference" />
+    <attr name="bind" format="reference" />
+
+</resources>

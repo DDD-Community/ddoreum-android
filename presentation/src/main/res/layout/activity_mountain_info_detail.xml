@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.project.ddoreum.mountaininfo.detail.MountainInfoDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".mountaininfo.detail.MountainInfoDetailActivity">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_mountain_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:foreground="@drawable/image_gradient"
+                    app:layout_constraintDimensionRatio="36:26"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:loadDetailImage="@{viewmodel.mountainDetailData.mountainImage}" />
+
+
+                <TextView
+                    android:id="@+id/tv_mountain_name_title"
+                    style="@style/Ddoreum.Font.MountainDetailTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="@{viewmodel.mountainDetailData.name}"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toTopOf="@+id/hashtag_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="도봉산" />
+
+                <ImageView
+                    android:id="@+id/iv_favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:onClick="@{()->viewmodel.updateMountainFavoriteState()}"
+                    android:src="@drawable/ic_not_favorite"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_mountain_name_title"
+                    app:layout_constraintStart_toEndOf="@+id/tv_mountain_name_title"
+                    app:layout_constraintTop_toTopOf="@+id/tv_mountain_name_title"
+                    app:setFavoriteMountain="@{viewmodel.mountainDetailData}" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/hashtag_1"
+                    style="@style/Ddoreum.Font.MountainDetailHashTagTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="8dp"
+                    android:visibility="gone"
+                    app:bindVisibleAndSetText1="@{viewmodel.mountainDetailData}"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_mountain_image"
+                    app:layout_constraintCircleRadius="4dp"
+                    app:layout_constraintStart_toStartOf="@+id/iv_mountain_image"
+                    tools:text="100대 명산"
+                    tools:visibility="visible" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/hashtag_2"
+                    style="@style/Ddoreum.Font.MountainDetailHashTagTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="8dp"
+                    android:visibility="gone"
+                    app:bindVisibleAndSetText2="@{viewmodel.mountainDetailData}"
+                    app:cornerRadius="6dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_mountain_image"
+                    app:layout_constraintCircleRadius="4dp"
+                    app:layout_constraintStart_toEndOf="@+id/hashtag_1"
+                    tools:text="서울시"
+                    tools:visibility="visible" />
+
+                <LinearLayout
+                    android:id="@+id/layout_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_mountain_image">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/gray_01"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="@null">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingVertical="22dp">
+
+                            <ImageView
+                                android:id="@+id/iv_location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="16dp"
+                                android:paddingStart="43dp"
+                                android:paddingEnd="43dp"
+                                android:src="@drawable/ic_location"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                style="@style/Ddoreum.Font.Body2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="위치"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/iv_location" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/gray_01"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="@null">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingVertical="22dp">
+
+                            <ImageView
+                                android:id="@+id/iv_call"
+                                android:layout_width="wrap_content"
+                                android:layout_height="16dp"
+                                android:paddingStart="43dp"
+                                android:paddingEnd="43dp"
+                                android:src="@drawable/ic_call"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                style="@style/Ddoreum.Font.Body2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="전화"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/iv_call" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/gray_01"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="@null">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingVertical="22dp">
+
+                            <ImageView
+                                android:id="@+id/iv_share"
+                                android:layout_width="wrap_content"
+                                android:layout_height="16dp"
+                                android:paddingStart="43dp"
+                                android:paddingEnd="43dp"
+                                android:src="@drawable/ic_share"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                style="@style/Ddoreum.Font.Body2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="공유"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/iv_share" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@color/gray_01"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_card" />
+
+                <TextView
+                    android:id="@+id/tv_mountain_info_sub_title1"
+                    style="@style/Ddoreum.Font.MountainDetailCardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="산 정보"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+                <TextView
+                    android:id="@+id/tv_mountain_info_sub_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:ellipsize="end"
+                    android:maxLines="5"
+                    android:paddingBottom="16dp"
+                    android:text="@{viewmodel.mountainDetailData.mountainDetail}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_mountain_info_sub_title1"
+                    tools:text="도봉산은 수도권에서 가까운 산으로 등산객이 가장 많은 산 중 하나입니다. 수려한 계곡과 기암기석으로 이루어져있습니다." />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@color/gray_01"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_mountain_info_sub_description" />
+
+                <TextView
+                    android:id="@+id/tv_mountain_info_sub_title2"
+                    style="@style/Ddoreum.Font.MountainDetailCardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="챌린지"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

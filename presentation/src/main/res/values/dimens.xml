@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- font -->
+    <dimen name="ddoreum_font_headline1">20dp</dimen>
+    <dimen name="ddoreum_font_headline2">18dp</dimen>
+    <dimen name="ddoreum_font_headline3">16dp</dimen>
+    <dimen name="ddoreum_font_subhead1">14dp</dimen>
+    <dimen name="ddoreum_font_body1">16dp</dimen>
+    <dimen name="ddoreum_font_body2">14dp</dimen>
+    <dimen name="ddoreum_font_description">12dp</dimen>
+
+    <!-- radius -->
+    <dimen name="radius_small">4dp</dimen>
+    <dimen name="radius_medium">8dp</dimen>
+    <dimen name="radius_large">12dp</dimen>
+    <dimen name="radius_xlarge">16dp</dimen>
+
+    <!-- other fonts -->
+    <dimen name="font_bottom_navigation">10dp</dimen>
+    <dimen name="font_splash_title">40dp</dimen>
+
+</resources>
