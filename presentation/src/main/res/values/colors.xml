@@ -26,4 +26,5 @@
 
     <color name="transparent">#00000000</color>
     <color name="dim">#20000000</color>
+    <color name="dim_deep">#4D000000</color>
 </resources>

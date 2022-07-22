@@ -15,15 +15,11 @@
     <string name="splash_title">서비스 이용을 위해\n필요한 권한을 허용해주세요</string>
     <string name="permission_noti_popup_title">이용에 대한 액세스 권한이 없어요</string>
     <string name="permission_noti_popup_description">앱 설정으로 가서 액세스 권한을 수정 할 수 있어요.\n이동하시겠어요?</string>
-    <string name="permission_noti_popup_setting">설정으로 이동</string>
+    <string name="permission_noti_popup_setting">설정하기</string>
+    <string name="permission_noti_popup_close">취소하기</string>
     <string name="login_failed">로그인에 실패하였습니다. 다시 시도해 주세요.</string>
     <string name="login_success">%s님. 또오름에 다시 오셨군요!</string>
 
-
-    <!-- Challenge -->
-    <string name="challenge_sub_title_on_going">진행 중 챌린지</string>
-    <string name="challenge_sub_title_period">기간 별 챌린지</string>
-    <string name="challenge_sub_title_location">위치 별 챌린지</string>
     <!-- Home -->
     <string name="home_title">%s 님\n오늘은 어느 산으로\n가볼까요</string>
     <string name="home_my_climbing">나의 산행</string>
@@ -37,6 +33,17 @@
     <string name="home_cert_description">인증하고자 하는 산의 반경 500m 안에 있어야해요.</string>
     <string name="home_record_title">기록하기</string>
     <string name="home_record_description">위치 상관 없이 일기처럼 사진과 글을 기록해요.</string>
+
+    <!-- Challenge -->
+    <string name="challenge_sub_title_on_going">진행 중 챌린지</string>
+    <string name="challenge_sub_title_period">기간 별 챌린지</string>
+    <string name="challenge_sub_title_location">위치 별 챌린지</string>
+
+    <!-- Record -->
+    <string name="record_title">기록</string>
+    <string name="record_description">현재 기록탭은 공사중이에요😭\n우리 곧 만나요!</string>
+    <string name="record_hiking_info_format">%s %s</string>
+
 
     <!-- MyPage -->
     <string name="mypage_my_orruem">나의 오름</string>

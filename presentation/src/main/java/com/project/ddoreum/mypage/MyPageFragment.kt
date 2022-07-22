@@ -2,24 +2,16 @@ package com.project.ddoreum.mypage
 
 import android.content.Intent
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.project.ddoreum.R
 import com.project.ddoreum.common.hikingprogress.HikingProgressAdapter
+import com.project.ddoreum.common.repeatCallDefaultOnStarted
 import com.project.ddoreum.core.BaseFragment
 import com.project.ddoreum.databinding.FragmentMyPageBinding
-import com.project.ddoreum.di.MainDispatcher
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
-
-    @Inject
-    @MainDispatcher
-    lateinit var mainDispatcher: CoroutineDispatcher
 
     override val viewModel: MyPageViewModel by viewModels()
 
@@ -34,10 +26,20 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     }
 
     override fun setupCollect() {
-        lifecycleScope.launch(mainDispatcher) {
+        repeatCallDefaultOnStarted {
             viewModel.state.collect { state ->
                 when (state) {
-                    MyPageState.OpenSource -> {
+                    MyPageState.Init -> {
+                        viewModel.getUserName()
+                    }
+                }
+            }
+        }
+
+        repeatCallDefaultOnStarted {
+            viewModel.event.collect { event ->
+                when (event) {
+                    MyPageViewEvent.OpenSource -> {
                         startActivity(Intent(requireContext(), OssLicensesMenuActivity::class.java))
                     }
                 }

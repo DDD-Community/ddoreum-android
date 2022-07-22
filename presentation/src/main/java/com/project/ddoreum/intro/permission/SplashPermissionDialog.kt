@@ -76,7 +76,7 @@ class SplashPermissionDialog :
             .setDeniedTitle(R.string.permission_noti_popup_title)
             .setDeniedMessage(R.string.permission_noti_popup_description)
             .setGotoSettingButtonText(R.string.permission_noti_popup_setting)
-            .setDeniedCloseButtonText(R.string.close)
+            .setDeniedCloseButtonText(R.string.permission_noti_popup_close)
             .check()
 
         if (permissionResult.isGranted) {
