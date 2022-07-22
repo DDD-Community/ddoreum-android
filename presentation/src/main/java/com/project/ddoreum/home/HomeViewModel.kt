@@ -142,11 +142,7 @@ class HomeViewModel @Inject constructor(
                     !it.mountainInfo.mountainImage.isNullOrBlank()
                             && !it.mountainInfo.subTitle.isNullOrBlank()
                 }?.let {
-                    val randomList: ArrayList<MountainInfoData> = arrayListOf()
-                    for (i in 0..2) {
-                        randomList.add(it.random())
-                    }
-
+                    val randomList = it.shuffled().subList(0, 3)
                     _recommendedMountainList.emit(randomList)
                 }
             }.launchIn(viewModelScope)
@@ -159,7 +155,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun onClickChallenge(){
+    fun onClickChallenge() {
         viewModelScope.launch(mainDispatcher) {
             _event.emit(HomeViewEvent.ClickChallenge)
         }
