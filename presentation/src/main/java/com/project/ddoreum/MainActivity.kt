@@ -4,6 +4,7 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commitNow
 import com.project.ddoreum.challenge.ChallengeFragment
+import com.project.ddoreum.common.repeatCallDefaultOnStarted
 import com.project.ddoreum.core.BaseActivity
 import com.project.ddoreum.databinding.ActivityMainBinding
 import com.project.ddoreum.home.HomeFragment
@@ -24,6 +25,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         if (currentFragment == null) {
             changeFragment(HomeFragment.newInstance(), HomeFragment.toString())
         }
+
+        repeatCallDefaultOnStarted {
+            viewModel.event.collect { event ->
+                when (event) {
+                    MainViewEvent.ClickChallenge -> {
+                        changeFragment(
+                            ChallengeFragment.newInstance(),
+                            ChallengeFragment.toString()
+                        )
+                        binding.bottomNavView.selectedItemId = R.id.nav_challenge
+                    }
+                }
+            }
+        }
+
     }
 
     private fun setUpNavigation() = with(binding) {

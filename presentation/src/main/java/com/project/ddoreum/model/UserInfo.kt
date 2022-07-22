@@ -10,7 +10,7 @@ data class UserInfo(
         val default = UserInfo(
             name = "테스트",
             hikingLv = 3,
-            hikingElevation = 150,
+            hikingElevation = 1250,
             remainElevation = 3750
         )
     }

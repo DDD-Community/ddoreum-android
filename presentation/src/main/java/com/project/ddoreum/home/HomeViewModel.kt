@@ -10,10 +10,11 @@ import com.project.ddoreum.di.IoDispatcher
 import com.project.ddoreum.di.MainDispatcher
 import com.project.ddoreum.domain.entity.challenge.ChallengeInfoData
 import com.project.ddoreum.domain.entity.challenge.InProgressChallengeData
+import com.project.ddoreum.domain.entity.mountain.MountainInfoData
 import com.project.ddoreum.domain.usecase.challenge.GetAllChallengeListUseCase
 import com.project.ddoreum.domain.usecase.challenge.GetAllINProgressChallengeUseCase
 import com.project.ddoreum.domain.usecase.intro.GetUserInfoUseCase
-import com.project.ddoreum.model.MountainRecommend
+import com.project.ddoreum.domain.usecase.mountain.GetAllMountainInfoUseCase
 import com.project.ddoreum.model.UserInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -34,6 +35,7 @@ class HomeViewModel @Inject constructor(
     private val getAllChallengeListUseCase: GetAllChallengeListUseCase,
     private val getAllINProgressChallengeUseCase: GetAllINProgressChallengeUseCase,
     private val getUserInfoUseCase: GetUserInfoUseCase,
+    private val getAllMountainInfoUseCase: GetAllMountainInfoUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @MainDispatcher private val mainDispatcher: CoroutineDispatcher
 ) : BaseViewModel() {
@@ -54,10 +56,6 @@ class HomeViewModel @Inject constructor(
     val userInfo: LiveData<UserInfo>
         get() = _userInfo
 
-    private val _recommendList = MutableStateFlow<List<MountainRecommend>>(emptyList())
-    val recommendList: StateFlow<List<MountainRecommend>>
-        get() = _recommendList
-
     private val _recommendChallengeList = MutableStateFlow<List<ChallengeInfoData>>(emptyList())
     val recommendChallengeList: StateFlow<List<ChallengeInfoData>>
         get() = _recommendChallengeList
@@ -66,6 +64,10 @@ class HomeViewModel @Inject constructor(
         MutableStateFlow<List<InProgressChallengeData>>(emptyList())
     val inProgressChallengeData: StateFlow<List<InProgressChallengeData>>
         get() = _inProgressChallengeData
+
+    private val _recommendedMountainList = MutableStateFlow<List<MountainInfoData>>(emptyList())
+    val recommendedMountainList: StateFlow<List<MountainInfoData>>
+        get() = _recommendedMountainList
 
 
     private fun getInProgressChallengeList() {
@@ -116,8 +118,6 @@ class HomeViewModel @Inject constructor(
     init {
         _userInfo.value = UserInfo.default
 
-        // TODO : 더미데이터 삭제
-        _recommendList.value = MountainRecommend.defaultList
         _recommendChallengeList.value = ChallengeInfoData.default
         getInProgressChallengeList()
     }
@@ -135,9 +135,29 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun getRecommendedMountainData() {
+        viewModelScope.launch(ioDispatcher) {
+            getAllMountainInfoUseCase.invoke(Unit).onEach {
+                it?.filter {
+                    !it.mountainInfo.mountainImage.isNullOrBlank()
+                            && !it.mountainInfo.subTitle.isNullOrBlank()
+                }?.let {
+                    val randomList = it.shuffled().subList(0, 3)
+                    _recommendedMountainList.emit(randomList)
+                }
+            }.launchIn(viewModelScope)
+        }
+    }
+
     fun onClickCertButton() {
         viewModelScope.launch(mainDispatcher) {
             _event.emit(HomeViewEvent.ClickCert)
+        }
+    }
+
+    fun onClickChallenge() {
+        viewModelScope.launch(mainDispatcher) {
+            _event.emit(HomeViewEvent.ClickChallenge)
         }
     }
 }

@@ -38,7 +38,7 @@ class SplashViewModel @Inject constructor(
     fun initSplash() {
         _titleState.value = false
         viewModelScope.launch(mainDispatcher) {
-            delay(500)
+            delay(1000)
 
             _state.emit(SplashState.Permission)
         }

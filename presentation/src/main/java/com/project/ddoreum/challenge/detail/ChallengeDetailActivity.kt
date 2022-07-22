@@ -18,14 +18,19 @@ class ChallengeDetailActivity :
         bind {
             viewmodel = viewModel
             lifecycleOwner = this@ChallengeDetailActivity
+
+            ivBack.setOnClickListener {
+                onBackPressed()
+            }
         }
         initRequestData()
         initRcvAdapter()
         initCollectFlow()
+
     }
 
     private fun initRequestData() {
-        val id = intent.getIntExtra("challenge_id", -1)
+        val id = intent.getIntExtra(CHALLENGE_ID, -1)
         if (id != -1) {
             viewModel.getChallengeDetailInfo(id)
         }
@@ -51,10 +56,6 @@ class ChallengeDetailActivity :
     }
 
     companion object {
-        fun newInstance(id: Int): ChallengeDetailActivity {
-            return ChallengeDetailActivity().apply {
-                intent.putExtra("challenge_id", id)
-            }
-        }
+        const val CHALLENGE_ID = "challenge_id"
     }
 }

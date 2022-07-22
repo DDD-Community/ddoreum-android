@@ -16,18 +16,3 @@ fun View.bindVisible(isVisible: Boolean) {
 fun ConstraintLayout.bindSplashBackgroundColor(isFirst: Boolean?) {
     if (isFirst == true) (background as TransitionDrawable).startTransition(500)
 }
-
-@BindingAdapter("bind:splash_title_config")
-fun View.bindSplashTitleConfig(isApplied: Boolean?) {
-    isSelected = (isApplied == true)
-
-    if (isApplied == true) {
-        animate()
-            .translationY(-130.dp.toFloat())
-            .setDuration(1000)
-            .alpha(1f)
-            .withEndAction {
-                translationY = -130.dp.toFloat()
-            }
-    }
-}

@@ -44,6 +44,7 @@ fun ImageView.bindImageUrl(url: String?) {
     GlideApp.with(this.context)
         .load(url)
         .centerCrop()
+        .thumbnail(0.1f)
         .transition(withCrossFade())
         .into(this)
 }
